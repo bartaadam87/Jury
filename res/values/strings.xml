@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Jury</string>
+    <string name="button_send">Send</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+	<string name="type">Type / Typ / Type</string>    
+	<string name="head">Head / Kopf / Tête</string>
+	<string name="eyes">Eyes / Augen / Yeux</string>
+	<string name="ears">Ears / Ohren / Oreilles</string>
+	<string name="coat">Coat / Fell / Fourrure</string>
+	<string name="tail">Tail / Schwanz / Queue</string>
+	<string name="condition">Condition / Kondition / Condition</string>
+	<string name="impress">Impress / Gesamteindruck / Impression</string>
+	<string name="comment">Comment / Kommentar / Annotation</string>
+	<string name="backButton">Back</string>
+	<string name="jury_name">Jury name</string>
+	
+	<string name="backToast">Back!</string>
+	<string name="wellcome_toast">Zkouskovy toast!</string>
+</resources>
