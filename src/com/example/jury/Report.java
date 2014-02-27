@@ -1,91 +1,152 @@
 package com.example.jury;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-
 public class Report {
 
-	//prace s databazi	
-	
-	protected static final String DATABASE_NAME = "juryDB";
-	protected static final int DATABASE_VERSION = 1;
+	// private variables
+	int _id;
+	String _type;
+	String _head;
+	String _eyes;
+	String _ears;
+	String _coat;
+	String _tail;
+	String _condition;
+	String _impress;
+	String _comment;
 
-	protected static final String TB_NAME = "reports";
-	
-	public static final String COLUMN_ID = "_id";
-	public static final String COLUMN_TYPE = "type";
-	public static final String COLUMN_HEAD = "head";
-	
-	protected static final String ORDER_BY = COLUMN_ID + " DESC";
-	
-	public static final String[] columns = { COLUMN_ID, COLUMN_TYPE, COLUMN_HEAD };
-	
-	private SQLiteOpenHelper openHelper;
-	
+	// Empty constructor
+	public Report() {
 
-	static class DatabaseHelper extends SQLiteOpenHelper {
-
-		DatabaseHelper(Context context) {
-			super(context, DATABASE_NAME, null, DATABASE_VERSION);
-		}
-
-		@Override
-		public void onCreate(SQLiteDatabase db) {
-			db.execSQL("CREATE TABLE " + TB_NAME + " (" + COLUMN_ID
-					+ " INTEGER PRIMARY KEY," + COLUMN_TYPE
-					+ " TEXT NOT NULL," + COLUMN_HEAD + " TEXT NOT NULL" + ");");
-		}
-
-		@Override
-		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-			db.execSQL("DROP TABLE IF EXISTS notes");
-			onCreate(db);
-		}
 	}
 
-	public Report(Context ctx) {
-		openHelper = new DatabaseHelper(ctx);
+	// constructor
+	public Report(int id, String type, String _head, String _eyes,
+			String _ears, String _coat, String _tail, String _condition,
+			String _impress, String _comment) {
+		this._id = id;
+		this._type = type;
+		this._head = _head;
+		this._eyes = _eyes;
+		this._ears = _ears;
+		this._coat = _coat;
+		this._tail = _tail;
+		this._condition = _condition;
+		this._impress = _impress;
+		this._comment = _comment;
 	}
-
-	public Cursor getReports() {
-		SQLiteDatabase db = openHelper.getReadableDatabase();
-		return db.query(TB_NAME, columns, null, null, null, null, ORDER_BY);
-	}
-
-	public Cursor getReport(long id) {
-		SQLiteDatabase db = openHelper.getReadableDatabase();
-		String[] selectionArgs = { String.valueOf(id) };
-		return db.query(TB_NAME, columns, COLUMN_ID + "= ?", selectionArgs,
-				null, null, ORDER_BY);
-	}
-
-	public boolean deleteReport(long id) {
-		SQLiteDatabase db = openHelper.getWritableDatabase();
-		String[] selectionArgs = { String.valueOf(id) };
-
-		int deletedCount = db.delete(TB_NAME, COLUMN_ID + "= ?", selectionArgs);
-		db.close();
-		return deletedCount > 0;
-	}
-
-	public long insertReport(String title, String text) {
-		SQLiteDatabase db = openHelper.getWritableDatabase();
-
-		ContentValues values = new ContentValues();
-		values.put(COLUMN_TYPE, title);
-		values.put(COLUMN_HEAD, text);
-
-		long id = db.insert(TB_NAME, null, values);
-		db.close();
-		return id;
-	}
-
-	public void close() {
-		openHelper.close();
-	}	
-		
 	
+	// constructor
+	public Report(String type, String _head, String _eyes,
+			String _ears, String _coat, String _tail, String _condition,
+			String _impress, String _comment) {
+		this._type = type;
+		this._head = _head;
+		this._eyes = _eyes;
+		this._ears = _ears;
+		this._coat = _coat;
+		this._tail = _tail;
+		this._condition = _condition;
+		this._impress = _impress;
+		this._comment = _comment;
+	}
+
+	// get ID
+	public int getID() {
+		return this._id;
+	}
+
+	// set id
+	public void setID(int id) {
+		this._id = id;
+	}
+
+	// get type
+	public String getType() {
+		return this._type;
+	}
+
+	// set type
+	public void setType(String type) {
+		this._type = type;
+	}
+	
+	// get head
+	public String getHead() {
+		return this._head;
+	}
+
+	// set head
+	public void setHead(String head) {
+		this._head = head;
+	}
+	
+	// get eyes
+	public String getEyes() {
+		return this._eyes;
+	}
+
+	// set eyes
+	public void setEyes(String eyes) {
+		this._eyes = eyes;
+	}
+	
+	// get ears
+	public String getEars() {
+		return this._ears;
+	}
+
+	// set ears
+	public void setEars(String ears) {
+		this._ears = ears;
+	}
+	
+	// get coat
+	public String getCoat() {
+		return this._coat;
+	}
+
+	// set coat
+	public void setCoat(String coat) {
+		this._coat = coat;
+	}
+	
+	// get tail
+	public String getTail() {
+		return this._tail;
+	}
+
+	// set tail
+	public void setTail(String tail) {
+		this._tail = tail;
+	}
+	
+	// get condition
+	public String getCondition() {
+		return this._condition;
+	}
+
+	// set condition
+	public void setCondition(String condition) {
+		this._condition = condition;
+	}
+	
+	// get impress
+	public String getImpress() {
+		return this._impress;
+	}
+	
+	// set impress
+	public void setImpress(String impress) {
+		this._impress = impress;
+	}
+	
+	// get comment
+	public String getComment() {
+		return this._comment;
+	}
+	
+	// set comment
+	public void setComment(String comment) {
+		this._comment = comment;
+	}
 }
