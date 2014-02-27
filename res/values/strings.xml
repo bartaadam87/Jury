@@ -15,8 +15,40 @@
 	<string name="impress">Impress / Gesamteindruck / Impression</string>
 	<string name="comment">Comment / Kommentar / Annotation</string>
 	<string name="backButton">Back</string>
-	<string name="jury_name">Jury name</string>
+	<string name="rank">Rank / Rang / Rang</string>
+	<string name="nomination">Nomination</string>
+	<string name="biv">Best in variety or show</string>
+	
+	<string name="nr">No. %1$d</string>
+	<string name="br">Breed: %1$s</string>
+	<string name="co">%1$s</string>
+	<string name="cl">Class: %1$s</string>
+	<string name="se">Sex: %1$s</string>
+	<string name="bo">Born: %1$s</string>
+	
+	<string name="jury_name">%1$s</string>
 	
 	<string name="backToast">Back!</string>
 	<string name="wellcome_toast">Zkouskovy toast!</string>
+
+    <string name="mark_prompt">Choose a mark</string>
+    
+    <string-array name="mark_arrays">
+        <item>Mark: EX1</item>
+        <item>Mark: EX2</item>
+        <item>Mark: EX3</item>
+    </string-array>
+
+    <string name="caption_prompt">Choose a mark</string>
+    
+    <string-array name="caption_arrays_class1">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+   
+    <string-array name="caption_arrays_class2">
+        <item>CAGCIB</item>
+        <item>CAGPIB</item>
+    </string-array>    
+
 </resources>
