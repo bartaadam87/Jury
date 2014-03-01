@@ -99,10 +99,10 @@ public final class R {
         public static final int nr=0x7f060011;
         public static final int rank=0x7f06000e;
         public static final int se=0x7f060015;
+        public static final int sendToast=0x7f060019;
         public static final int tail=0x7f060009;
         public static final int title_activity_main=0x7f060003;
         public static final int type=0x7f060004;
-        public static final int wellcome_toast=0x7f060019;
     }
     public static final class style {
         /** 

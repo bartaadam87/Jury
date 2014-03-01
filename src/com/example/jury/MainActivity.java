@@ -16,11 +16,14 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 	public final static String EXTRA_MESSAGE = "com.example.jury.MESSAGE";
-	public static final String INFO = "info";
-	public static final String JURY_NAME = "juryName";
+	// public static final String INFO = "info";
+	// public static final String JURY_NAME = "juryName";
+	//
+	// public static final String EXTRA_TYPE = "type";
+	// public static final String EXTRA_HEAD = "head";
+	public static final String ID = "id";
 
-	public static final String EXTRA_TYPE = "type";
-	public static final String EXTRA_HEAD = "head";
+	DatabaseHandler db = new DatabaseHandler(this);
 
 	// prace s formularem
 
@@ -47,24 +50,32 @@ public class MainActivity extends Activity {
 		markadapter.setDropDownViewResource(R.layout.spinner_layout);
 		mark.setAdapter(markadapter);
 
-		Spinner caption = (Spinner) findViewById(R.id.caption);
-		ArrayAdapter<CharSequence> captionadapter = ArrayAdapter
-				.createFromResource(this, selectCatClass(),
-						R.layout.spinner_layout);
-		captionadapter.setDropDownViewResource(R.layout.spinner_layout);
-		caption.setAdapter(captionadapter);
+		// int catId = Integer.parseInt(id);
+		// String info = i.getStringExtra(INFO);
+		// String juryName = i.getStringExtra(JURY_NAME);
+		//
+		// String[] parts = info.split(" / ");
+		DatabaseHandler db = new DatabaseHandler(this);
 
 		Intent i = getIntent();
-		String info = i.getStringExtra(INFO);
-		String juryName = i.getStringExtra(JURY_NAME);
+		String id = i.getStringExtra(ID);
 
-		String[] parts = info.split(" / ");
-		String catNo = parts[0];
-		String catBreed = parts[1];
-		String catCode = parts[2];
-		String catClass = parts[3];
-		String catSex = parts[4];
-		String catBorn = parts[5];
+		Report rep = db.getReport(Integer.parseInt(id));
+		String catNo = rep.getNo();
+		String catBreed = rep.getBreed();
+		String catCode = rep.getCode();
+		String catClass = rep.getCclass();
+		String catSex = rep.getSex();
+		String catBorn = rep.getBorn();
+		String catType = rep.getType();
+		String catHead = rep.getHead();
+		String catEyes = rep.getEyes();
+		String catEars = rep.getEars();
+		String catCoat = rep.getCoat();
+		String catTail = rep.getTail();
+		String catCondition = rep.getCondition();
+		String catImpress = rep.getImpress();
+		String catComment = rep.getComment();
 
 		TextView catNoTv = (TextView) findViewById(R.id.catNr);
 		TextView catBreedTv = (TextView) findViewById(R.id.catBreed);
@@ -72,21 +83,53 @@ public class MainActivity extends Activity {
 		TextView catClassTv = (TextView) findViewById(R.id.catClass);
 		TextView catSexTv = (TextView) findViewById(R.id.catSex);
 		TextView catBornTv = (TextView) findViewById(R.id.catBorn);
-		TextView juryNameTv = (TextView) findViewById(R.id.title_right);
+		// TextView juryNameTv = (TextView) findViewById(R.id.title_right);
 
-		int No = Integer.parseInt(catNo);
+		EditText type = (EditText) findViewById(R.id.type);
+		EditText head = (EditText) findViewById(R.id.head);
+		EditText eyes = (EditText) findViewById(R.id.eyes);
+		EditText ears = (EditText) findViewById(R.id.ears);
+		EditText coat = (EditText) findViewById(R.id.coat);
+		EditText tail = (EditText) findViewById(R.id.tail);
+		EditText condition = (EditText) findViewById(R.id.condition);
+		EditText impress = (EditText) findViewById(R.id.impress);
+		EditText comment = (EditText) findViewById(R.id.comment);
 
-		displayNr(No, catNoTv);
+		// int No = Integer.parseInt(catNo);
+		//
+		displayNr(catNo, catNoTv);
 		displayBreed(catBreed, catBreedTv);
 		displayCode(catCode, catCodeTv);
 		displayClass(catClass, catClassTv);
 		displaySex(catSex, catSexTv);
 		displayBorn(catBorn, catBornTv);
-		displayJuryName(juryName, juryNameTv);
+		// displayJuryName(juryName, juryNameTv);
 
+		type.setText(catType);
+		head.setText(catHead);
+		eyes.setText(catEyes);
+		ears.setText(catEars);
+		coat.setText(catCoat);
+		tail.setText(catTail);
+		condition.setText(catCondition);
+		impress.setText(catImpress);
+		comment.setText(catComment);
+
+		// Funkcni vypis z databaze!
+		// DatabaseHandler db = new DatabaseHandler(this);
+		// Report rep2 = db.getReport(1);
+		// EditText typeEt = (EditText) findViewById(R.id.type);
+		// typeEt.setText(rep2.getType());
+
+		Spinner caption = (Spinner) findViewById(R.id.caption);
+		ArrayAdapter<CharSequence> captionadapter = ArrayAdapter
+				.createFromResource(this, selectCatClass(catClass),
+						R.layout.spinner_layout);
+		captionadapter.setDropDownViewResource(R.layout.spinner_layout);
+		caption.setAdapter(captionadapter);
 	}
 
-	protected void displayNr(int nr, TextView tv) {
+	protected void displayNr(String nr, TextView tv) {
 		Resources res = getResources();
 		String text = res.getString(R.string.nr, nr);
 		tv.setText(text);
@@ -128,16 +171,15 @@ public class MainActivity extends Activity {
 		tv.setText(text);
 	}
 
-	private int catClass = 2;
-
-	private int selectCatClass() {
-		if (catClass == 1)
+	// DOPLNIT!!
+	private int selectCatClass(String cc) {
+		if (cc.equals("6"))
 			return R.array.caption_arrays_class1;
 
-		if (catClass == 2)
+		if (cc.equals("9"))
 			return R.array.caption_arrays_class2;
 
-		return catClass;
+		return 0;
 	}
 
 	// super.onCreate(savedInstanceState);
@@ -151,17 +193,43 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	protected void startListActivity() {
+		Intent intent = new Intent(this, JuryActivity.class);
+		startActivity(intent);
+	}
+	
 	public void backButtonClicked(View button) {
 		Toast.makeText(this, R.string.backToast, Toast.LENGTH_LONG).show();
 		this.finish();
+		startListActivity();
 	}
 
 	public void buttonClicked(View button) {
-		System.out.println(((EditText) this.findViewById(R.id.type)).getText()
-				.toString());
-		System.out.println(((EditText) this.findViewById(R.id.head)).getText()
-				.toString());
-		Toast.makeText(this, R.string.wellcome_toast, Toast.LENGTH_LONG).show();
+		Intent i = getIntent();
+		String id = i.getStringExtra(ID);
+		EditText typeEt = (EditText) findViewById(R.id.type);
+		String getCatType = typeEt.getText().toString();
+		EditText headEt = (EditText) findViewById(R.id.head);
+		String getCatHead = headEt.getText().toString();
+		EditText eyesEt = (EditText) findViewById(R.id.eyes);
+		String getCatEyes = eyesEt.getText().toString();
+		EditText earsEt = (EditText) findViewById(R.id.ears);
+		String getCatEars = earsEt.getText().toString();
+		EditText coatEt = (EditText) findViewById(R.id.coat);
+		String getCatCoat = coatEt.getText().toString();
+		EditText tailEt = (EditText) findViewById(R.id.tail);
+		String getCatTail = tailEt.getText().toString();
+		EditText conditionEt = (EditText) findViewById(R.id.condition);
+		String getCatCondition = conditionEt.getText().toString();
+		EditText impressEt = (EditText) findViewById(R.id.impress);
+		String getCatImpress = impressEt.getText().toString();
+		EditText commentEt = (EditText) findViewById(R.id.comment);
+		String getCatComment = commentEt.getText().toString();
+		db.edit(Integer.parseInt(id), getCatType, getCatHead, getCatEyes,
+				getCatEars, getCatCoat, getCatTail, getCatCondition,
+				getCatImpress, getCatComment);
+		startListActivity();
+		Toast.makeText(this, R.string.sendToast, Toast.LENGTH_LONG).show();
 		this.finish();
 	}
 

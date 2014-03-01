@@ -19,7 +19,7 @@
 	<string name="nomination">Nomination</string>
 	<string name="biv">Best in variety or show</string>
 	
-	<string name="nr">No. %1$d</string>
+	<string name="nr">No. %1$s</string>
 	<string name="br">Breed: %1$s</string>
 	<string name="co">%1$s</string>
 	<string name="cl">Class: %1$s</string>
@@ -29,7 +29,7 @@
 	<string name="jury_name">%1$s</string>
 	
 	<string name="backToast">Back!</string>
-	<string name="wellcome_toast">Zkouskovy toast!</string>
+	<string name="sendToast">Success!</string>
 
     <string name="mark_prompt">Choose a mark</string>
     
