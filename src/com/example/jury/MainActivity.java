@@ -24,7 +24,8 @@ public class MainActivity extends Activity {
 	public static final String ID = "id";
 
 	DatabaseHandler db = new DatabaseHandler(this);
-
+	DatabaseJuryHandler dbj = new DatabaseJuryHandler(this);
+	
 	// prace s formularem
 
 	@Override
@@ -50,12 +51,17 @@ public class MainActivity extends Activity {
 		markadapter.setDropDownViewResource(R.layout.spinner_layout);
 		mark.setAdapter(markadapter);
 
+		Jury jury = dbj.getJury(1);
+		String juryName = jury.getName();
+		TextView nameTv = (TextView) findViewById(R.id.title_right);
+		displayName(juryName, nameTv);
+		
 		// int catId = Integer.parseInt(id);
 		// String info = i.getStringExtra(INFO);
 		// String juryName = i.getStringExtra(JURY_NAME);
 		//
 		// String[] parts = info.split(" / ");
-		DatabaseHandler db = new DatabaseHandler(this);
+//		DatabaseHandler db = new DatabaseHandler(this);
 
 		Intent i = getIntent();
 		String id = i.getStringExtra(ID);
@@ -165,7 +171,7 @@ public class MainActivity extends Activity {
 		tv.setText(text);
 	}
 
-	protected void displayJuryName(String jn, TextView tv) {
+	protected void displayName(String jn, TextView tv) {
 		Resources res = getResources();
 		String text = res.getString(R.string.jury_name, jn);
 		tv.setText(text);

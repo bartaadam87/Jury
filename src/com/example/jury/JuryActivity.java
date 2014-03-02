@@ -25,6 +25,7 @@ public class JuryActivity extends ListActivity {
 	public static final String ID = "id";
 
 	DatabaseHandler db = new DatabaseHandler(this);
+	DatabaseJuryHandler dbj = new DatabaseJuryHandler(this);
 
 	ArrayList<String> names = new ArrayList<String>();
 
@@ -59,6 +60,11 @@ public class JuryActivity extends ListActivity {
 
 		R.layout.title_layout);
 
+		Jury jury = dbj.getJury(1);
+		String juryName = jury.getName();
+		TextView nameTv = (TextView) findViewById(R.id.title_right);
+		displayName(juryName, nameTv);
+		
 		// Insert test to database
 		// Log.d("Insert: ", "Inserting ..");
 		// db.addReport(new Report("2", "MCO", "F22 (e)", "9", "01",
@@ -108,6 +114,9 @@ public class JuryActivity extends ListActivity {
 					+ rep.getSex() + " / " + "Born: " + rep.getBorn();
 			names.add(log);
 		}
+		//
+		// Log.d("Insert: ", "Inserting ..");
+		// dbj.addJury(new Jury("Simon Testikov"));
 
 		// TextView juryNameTv = (TextView) getWindow().findViewById(
 		// R.id.title_right);
@@ -220,7 +229,7 @@ public class JuryActivity extends ListActivity {
 		// }
 	}
 
-	protected void displayJuryName(String jn, TextView tv) {
+	protected void displayName(String jn, TextView tv) {
 		Resources res = getResources();
 		String text = res.getString(R.string.jury_name, jn);
 		tv.setText(text);

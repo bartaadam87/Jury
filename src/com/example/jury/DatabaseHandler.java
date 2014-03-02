@@ -14,8 +14,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final int DATABASE_VERSION = 1;
 	private static final String DATABASE_NAME = "juryDatabase.db";
 	private static final String TABLE_REPORTS = "reports";
-	private static final String TABLE_JURY = "jury";
-	
+
 	// Table Columns names
 	private static final String KEY_ID = "id";
 	private static final String KEY_NO = "no";
@@ -33,7 +32,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_CONDITION = "condition";
 	private static final String KEY_IMPRESS = "impress";
 	private static final String KEY_COMMENT = "comment";
-	private static final String KEY_NAME = "name";
 
 	public DatabaseHandler(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -173,20 +171,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.delete(TABLE_REPORTS, KEY_ID + " = ?",
 				new String[] { String.valueOf(report.getID()) });
 		db.close();
-	}
-	
-	// Get jury name
-	Jury getJuryName(int id) {
-		SQLiteDatabase db = this.getReadableDatabase();
-
-		Cursor cursor = db.query(TABLE_JURY, new String[] { KEY_ID, KEY_NAME }, KEY_ID + "=?",
-				new String[] { String.valueOf(id) }, null, null, null, null);
-		if (cursor != null)
-			cursor.moveToFirst();
-
-		Jury jury = new Jury(Integer.parseInt(cursor.getString(0)),
-				cursor.getString(1));
-		return jury;
 	}
 
 }
