@@ -59,36 +59,31 @@ public class JuryActivity extends ListActivity {
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
 
 		R.layout.title_layout);
-
-		Jury jury = dbj.getJury(1);
-		String juryName = jury.getName();
-		TextView nameTv = (TextView) findViewById(R.id.title_right);
-		displayName(juryName, nameTv);
 		
 		// Insert test to database
-		// Log.d("Insert: ", "Inserting ..");
-		// db.addReport(new Report("2", "MCO", "F22 (e)", "9", "01",
-		// "23.9.1987",
-		// "Type", "Small and round", "Blue and ugly", "Dont even ask",
-		// "Coat nice", "Tail long", "Condition bad", "Impress good",
-		// "Comment"));
-		// db.addReport(new Report("3", "MCO", "F12", "3", "01", "23.9.1987",
-		// "Type", "Small and round", "Blue and ugly", "Dont even ask",
-		// "Coat nice", "Tail long", "Condition bad", "Impress good",
-		// "Comment"));
-		// db.addReport(new Report("7", "MCO", "b", "9", "01", "23.9.1987", "",
-		// "", "", "", "", "", "", "", ""));
-		// db.addReport(new Report("10", "PER", "ABC", "9", "01", "23.9.1987",
-		// "",
-		// "", "", "", "", "", "", "", ""));
-		// db.addReport(new Report("11", "EXO", "G(11)", "9", "01", "23.9.1987",
-		// "Type", "Small and round", "Blue and ugly", "Dont even ask",
-		// "Coat nice", "Tail long", "Condition bad", "Impress good",
-		// "Comment"));
-		// db.addReport(new Report("15", "EXO", "ABC", "6", "01", "23.9.1987",
-		// "Type", "Small and round", "Blue and ugly", "Dont even ask",
-		// "Coat nice", "Tail long", "Condition bad", "Impress good",
-		// "Comment"));
+//		 Log.d("Insert: ", "Inserting ..");
+//		 db.addReport(new Report("30", "MCO", "F22 (e)", "1", "01",
+//		 "23.9.1987",
+//		 "Type", "Small and round", "Blue and ugly", "Dont even ask",
+//		 "Coat nice", "Tail long", "Condition bad", "Impress good",
+//		 "Comment"));
+//		 db.addReport(new Report("35", "MCO", "F12", "2", "01", "23.9.1987",
+//		 "Type", "Small and round", "Blue and ugly", "Dont even ask",
+//		 "Coat nice", "Tail long", "Condition bad", "Impress good",
+//		 "Comment"));
+//		 db.addReport(new Report("70", "MCO", "b", "7", "01", "23.9.1987", "",
+//		 "", "", "", "", "", "", "", ""));
+//		 db.addReport(new Report("101", "PER", "ABC", "6", "01", "23.9.1987",
+//		 "",
+//		 "", "", "", "", "", "", "", ""));
+//		 db.addReport(new Report("115", "EXO", "G(11)", "11", "01", "23.9.1987",
+//		 "Type", "Small and round", "Blue and ugly", "Dont even ask",
+//		 "Coat nice", "Tail long", "Condition bad", "Impress good",
+//		 "Comment"));
+//		 db.addReport(new Report("156", "EXO", "ABC", "12", "01", "23.9.1987",
+//		 "Type", "Small and round", "Blue and ugly", "Dont even ask",
+//		 "Coat nice", "Tail long", "Condition bad", "Impress good",
+//		 "Comment"));
 
 		// Reading from Log
 		Log.d("Reading: ", "Reading stuff..");
@@ -114,9 +109,10 @@ public class JuryActivity extends ListActivity {
 					+ rep.getSex() + " / " + "Born: " + rep.getBorn();
 			names.add(log);
 		}
-		//
-		// Log.d("Insert: ", "Inserting ..");
-		// dbj.addJury(new Jury("Simon Testikov"));
+		
+//		Insert Jury name into SQL database
+//		 Log.d("Insert: ", "Inserting ..");
+//		 dbj.addJury(new Jury("Simon Testikov"));
 
 		// TextView juryNameTv = (TextView) getWindow().findViewById(
 		// R.id.title_right);
@@ -129,6 +125,11 @@ public class JuryActivity extends ListActivity {
 		// String juryName = i.getStringExtra(JURY_NAME);
 		// displayJuryName(juryName, juryNameTv);
 
+		Jury jury = dbj.getJury(1);
+		String juryName = jury.getName();
+		TextView nameTv = (TextView) findViewById(R.id.title_right);
+		displayName(juryName, nameTv);
+		
 		setListAdapter(new MyAdapater(this, R.layout.list_layout, names));
 	}
 

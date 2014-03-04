@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
 
 	DatabaseHandler db = new DatabaseHandler(this);
 	DatabaseJuryHandler dbj = new DatabaseJuryHandler(this);
-	
+
 	// prace s formularem
 
 	@Override
@@ -55,13 +55,13 @@ public class MainActivity extends Activity {
 		String juryName = jury.getName();
 		TextView nameTv = (TextView) findViewById(R.id.title_right);
 		displayName(juryName, nameTv);
-		
+
 		// int catId = Integer.parseInt(id);
 		// String info = i.getStringExtra(INFO);
 		// String juryName = i.getStringExtra(JURY_NAME);
 		//
 		// String[] parts = info.split(" / ");
-//		DatabaseHandler db = new DatabaseHandler(this);
+		// DatabaseHandler db = new DatabaseHandler(this);
 
 		Intent i = getIntent();
 		String id = i.getStringExtra(ID);
@@ -179,11 +179,34 @@ public class MainActivity extends Activity {
 
 	// DOPLNIT!!
 	private int selectCatClass(String cc) {
+		if (cc.equals("1") || cc.equals("2") || cc.equals("11")
+				|| cc.equals("12") || cc.equals("13a") || cc.equals("13b")
+				|| cc.equals("13c") || cc.equals("14"))
+			return R.array.caption_arrays_classNo;
+
+		if (cc.equals("3"))
+			return R.array.caption_arrays_class3;
+
+		if (cc.equals("4"))
+			return R.array.caption_arrays_class4;
+
+		if (cc.equals("5"))
+			return R.array.caption_arrays_class5;
+
 		if (cc.equals("6"))
-			return R.array.caption_arrays_class1;
+			return R.array.caption_arrays_class6;
+
+		if (cc.equals("7"))
+			return R.array.caption_arrays_class7;
+
+		if (cc.equals("8"))
+			return R.array.caption_arrays_class8;
 
 		if (cc.equals("9"))
-			return R.array.caption_arrays_class2;
+			return R.array.caption_arrays_class9;
+
+		if (cc.equals("10"))
+			return R.array.caption_arrays_class10;
 
 		return 0;
 	}
@@ -203,7 +226,7 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(this, JuryActivity.class);
 		startActivity(intent);
 	}
-	
+
 	public void backButtonClicked(View button) {
 		Toast.makeText(this, R.string.backToast, Toast.LENGTH_LONG).show();
 		this.finish();

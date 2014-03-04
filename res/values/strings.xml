@@ -5,34 +5,30 @@
     <string name="button_send">Send</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
-	<string name="type">Type / Typ / Type</string>    
-	<string name="head">Head / Kopf / Tête</string>
-	<string name="eyes">Eyes / Augen / Yeux</string>
-	<string name="ears">Ears / Ohren / Oreilles</string>
-	<string name="coat">Coat / Fell / Fourrure</string>
-	<string name="tail">Tail / Schwanz / Queue</string>
-	<string name="condition">Condition / Kondition / Condition</string>
-	<string name="impress">Impress / Gesamteindruck / Impression</string>
-	<string name="comment">Comment / Kommentar / Annotation</string>
-	<string name="backButton">Back</string>
-	<string name="rank">Rank / Rang / Rang</string>
-	<string name="nomination">Nomination</string>
-	<string name="biv">Best in variety or show</string>
-	
-	<string name="nr">No. %1$s</string>
-	<string name="br">Breed: %1$s</string>
-	<string name="co">%1$s</string>
-	<string name="cl">Class: %1$s</string>
-	<string name="se">Sex: %1$s</string>
-	<string name="bo">Born: %1$s</string>
-	
-	<string name="jury_name">%1$s</string>
-	
-	<string name="backToast">Back!</string>
-	<string name="sendToast">Success!</string>
-
+    <string name="type">Type / Typ / Type</string>
+    <string name="head">Head / Kopf / Tête</string>
+    <string name="eyes">Eyes / Augen / Yeux</string>
+    <string name="ears">Ears / Ohren / Oreilles</string>
+    <string name="coat">Coat / Fell / Fourrure</string>
+    <string name="tail">Tail / Schwanz / Queue</string>
+    <string name="condition">Condition / Kondition / Condition</string>
+    <string name="impress">Impress / Gesamteindruck / Impression</string>
+    <string name="comment">Comment / Kommentar / Annotation</string>
+    <string name="backButton">Back</string>
+    <string name="rank">Rank / Rang / Rang</string>
+    <string name="nomination">Nomination</string>
+    <string name="biv">Best in variety or show</string>
+    <string name="nr">No. %1$s</string>
+    <string name="br">Breed: %1$s</string>
+    <string name="co">%1$s</string>
+    <string name="cl">Class: %1$s</string>
+    <string name="se">Sex: %1$s</string>
+    <string name="bo">Born: %1$s</string>
+    <string name="jury_name">%1$s</string>
+    <string name="backToast">Back!</string>
+    <string name="sendToast">Success!</string>
     <string name="mark_prompt">Choose a mark</string>
-    
+
     <string-array name="mark_arrays">
         <item>Mark: EX1</item>
         <item>Mark: EX2</item>
@@ -40,15 +36,40 @@
     </string-array>
 
     <string name="caption_prompt">Choose a mark</string>
-    
-    <string-array name="caption_arrays_class1">
-        <item>1</item>
-        <item>2</item>
-    </string-array>
-   
-    <string-array name="caption_arrays_class2">
-        <item>CAGCIB</item>
-        <item>CAGPIB</item>
-    </string-array>    
 
+    <string-array name="caption_arrays_classNo">
+        <item></item>
+    </string-array>
+    <string-array name="caption_arrays_class3">
+        <item></item>
+        <item>CACS</item>
+    </string-array>
+    <string-array name="caption_arrays_class4">
+        <item></item>
+        <item>CAPS</item>
+    </string-array>
+    <string-array name="caption_arrays_class5">
+        <item></item>
+        <item>CAGCIB</item>
+    </string-array>
+    <string-array name="caption_arrays_class6">
+        <item></item>
+        <item>CAGPIB</item>
+    </string-array>
+    <string-array name="caption_arrays_class7">
+        <item></item>
+        <item>CACIB</item>
+    </string-array>
+	<string-array name="caption_arrays_class8">
+        <item></item>
+        <item>CAPIB</item>
+    </string-array>
+    <string-array name="caption_arrays_class9">
+        <item></item>
+        <item>CAC</item>
+    </string-array>
+    <string-array name="caption_arrays_class10">
+        <item></item>
+        <item>CAP</item>
+    </string-array>
 </resources>

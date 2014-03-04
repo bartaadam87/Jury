@@ -9,8 +9,15 @@ package com.example.jury;
 
 public final class R {
     public static final class array {
-        public static final int caption_arrays_class1=0x7f070001;
-        public static final int caption_arrays_class2=0x7f070002;
+        public static final int caption_arrays_class10=0x7f070009;
+        public static final int caption_arrays_class3=0x7f070002;
+        public static final int caption_arrays_class4=0x7f070003;
+        public static final int caption_arrays_class5=0x7f070004;
+        public static final int caption_arrays_class6=0x7f070005;
+        public static final int caption_arrays_class7=0x7f070006;
+        public static final int caption_arrays_class8=0x7f070007;
+        public static final int caption_arrays_class9=0x7f070008;
+        public static final int caption_arrays_classNo=0x7f070001;
         public static final int mark_arrays=0x7f070000;
     }
     public static final class attr {
