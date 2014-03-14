@@ -1,4 +1,6 @@
-package com.example.jury;
+package com.fimuni.jury;
+
+import com.fimuni.jury.R;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -25,6 +27,7 @@ public class MainActivity extends Activity {
 
 	DatabaseHandler db = new DatabaseHandler(this);
 	DatabaseJuryHandler dbj = new DatabaseJuryHandler(this);
+	DatabasePointsHandler dbp = new DatabasePointsHandler(this);
 
 	// prace s formularem
 
@@ -50,12 +53,16 @@ public class MainActivity extends Activity {
 						R.layout.spinner_layout);
 		markadapter.setDropDownViewResource(R.layout.spinner_layout);
 		mark.setAdapter(markadapter);
-
+		
 		Jury jury = dbj.getJury(1);
 		String juryName = jury.getName();
 		TextView nameTv = (TextView) findViewById(R.id.title_right);
 		displayName(juryName, nameTv);
 
+		nameTv.setTextColor(getResources().getColor(R.color.white));
+		TextView titleLeft = (TextView) findViewById(R.id.title_left);
+		titleLeft.setTextColor(getResources().getColor(R.color.white));
+		
 		// int catId = Integer.parseInt(id);
 		// String info = i.getStringExtra(INFO);
 		// String juryName = i.getStringExtra(JURY_NAME);
@@ -66,6 +73,7 @@ public class MainActivity extends Activity {
 		Intent i = getIntent();
 		String id = i.getStringExtra(ID);
 
+		//Get stuff to fill form header
 		Report rep = db.getReport(Integer.parseInt(id));
 		String catNo = rep.getNo();
 		String catBreed = rep.getBreed();
@@ -83,6 +91,16 @@ public class MainActivity extends Activity {
 		String catImpress = rep.getImpress();
 		String catComment = rep.getComment();
 
+		//points for each breed
+		Standard standard = dbp.getStandard(catBreed);
+		String headPoints = standard.getHead();
+		String eyesPoints = standard.getEyes();
+		String earsPoints = standard.getEars();
+		String bodyPoints = standard.getBody();
+		String coatPoints = standard.getCoat();
+		String tailPoints = standard.getTail();
+		String conditionPoints = standard.getCondition();
+		
 		TextView catNoTv = (TextView) findViewById(R.id.catNr);
 		TextView catBreedTv = (TextView) findViewById(R.id.catBreed);
 		TextView catCodeTv = (TextView) findViewById(R.id.catCode);
@@ -90,6 +108,13 @@ public class MainActivity extends Activity {
 		TextView catSexTv = (TextView) findViewById(R.id.catSex);
 		TextView catBornTv = (TextView) findViewById(R.id.catBorn);
 		// TextView juryNameTv = (TextView) findViewById(R.id.title_right);
+		TextView headPointsTv = (TextView) findViewById(R.id.headPoints);
+		TextView eyesPointsTv = (TextView) findViewById(R.id.eyesPoints);
+		TextView earsPointsTv = (TextView) findViewById(R.id.earsPoints);
+		TextView bodyPointsTv = (TextView) findViewById(R.id.bodyPoints);
+		TextView coatPointsTv = (TextView) findViewById(R.id.coatPoints);
+		TextView tailPointsTv = (TextView) findViewById(R.id.tailPoints);
+		TextView conditionPointsTv = (TextView) findViewById(R.id.conditionPoints);
 
 		EditText type = (EditText) findViewById(R.id.type);
 		EditText head = (EditText) findViewById(R.id.head);
@@ -100,7 +125,7 @@ public class MainActivity extends Activity {
 		EditText condition = (EditText) findViewById(R.id.condition);
 		EditText impress = (EditText) findViewById(R.id.impress);
 		EditText comment = (EditText) findViewById(R.id.comment);
-
+		
 		// int No = Integer.parseInt(catNo);
 		//
 		displayNr(catNo, catNoTv);
@@ -110,7 +135,14 @@ public class MainActivity extends Activity {
 		displaySex(catSex, catSexTv);
 		displayBorn(catBorn, catBornTv);
 		// displayJuryName(juryName, juryNameTv);
-
+		displayBodyP(bodyPoints, bodyPointsTv);
+		displayHeadP(headPoints, headPointsTv);
+		displayEyesP(eyesPoints, eyesPointsTv);
+		displayEarsP(earsPoints, earsPointsTv);
+		displayCoatP(coatPoints, coatPointsTv);
+		displayTailP(tailPoints, tailPointsTv);
+		displayConditionP(conditionPoints, conditionPointsTv);
+		
 		type.setText(catType);
 		head.setText(catHead);
 		eyes.setText(catEyes);
@@ -120,7 +152,7 @@ public class MainActivity extends Activity {
 		condition.setText(catCondition);
 		impress.setText(catImpress);
 		comment.setText(catComment);
-
+		
 		// Funkcni vypis z databaze!
 		// DatabaseHandler db = new DatabaseHandler(this);
 		// Report rep2 = db.getReport(1);
@@ -176,7 +208,49 @@ public class MainActivity extends Activity {
 		String text = res.getString(R.string.jury_name, jn);
 		tv.setText(text);
 	}
+	
+	protected void displayBodyP(String bp, TextView tv) {
+		Resources res = getResources();
+		String text = res.getString(R.string.bodyPoints, bp);
+		tv.setText(text);
+	}
+	
+	protected void displayHeadP(String hp, TextView tv) {
+		Resources res = getResources();
+		String text = res.getString(R.string.headPoints, hp);
+		tv.setText(text);
+	}
+	
+	protected void displayEyesP(String ep, TextView tv) {
+		Resources res = getResources();
+		String text = res.getString(R.string.eyesPoints, ep);
+		tv.setText(text);
+	}
 
+	protected void displayEarsP(String ep, TextView tv) {
+		Resources res = getResources();
+		String text = res.getString(R.string.earsPoints, ep);
+		tv.setText(text);
+	}
+	
+	protected void displayCoatP(String cp, TextView tv) {
+		Resources res = getResources();
+		String text = res.getString(R.string.coatPoints, cp);
+		tv.setText(text);
+	}
+	
+	protected void displayTailP(String tp, TextView tv) {
+		Resources res = getResources();
+		String text = res.getString(R.string.tailPoints, tp);
+		tv.setText(text);
+	}
+	
+	protected void displayConditionP(String cp, TextView tv) {
+		Resources res = getResources();
+		String text = res.getString(R.string.conditionPoints, cp);
+		tv.setText(text);
+	}
+	
 	// DOPLNIT!!
 	private int selectCatClass(String cc) {
 		if (cc.equals("1") || cc.equals("2") || cc.equals("11")

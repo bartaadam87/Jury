@@ -6,281 +6,424 @@
     android:gravity="center_horizontal|left"
     android:orientation="vertical" >
 
-   	<RelativeLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="top"
         android:orientation="horizontal" >
 
-	<TextView
-	    android:id="@+id/catNr"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentLeft="true"
-	    android:layout_alignParentTop="true"
-	    android:gravity="right"
-	    android:textAppearance="?android:attr/textAppearanceLarge"
-	    android:textSize="40sp" /> 
-   	    
-	<TextView
-	    android:id="@+id/catBreed"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentTop="true"
-	    android:layout_centerHorizontal="true"
-	    android:gravity="center"
-	    android:textAppearance="?android:attr/textAppearanceLarge"
-	    android:textSize="40sp" />
+        <TextView
+            android:id="@+id/catNr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:gravity="right"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="40sp" />
 
-	<TextView
-	    android:id="@+id/catCode"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentRight="true"
-	    android:layout_alignParentTop="true"
-	    android:gravity="right"
-	    android:textAppearance="?android:attr/textAppearanceLarge"
-	    android:textSize="40sp" />
-	
+        <TextView
+            android:id="@+id/catBreed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/catCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="right"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="40sp" />
     </RelativeLayout>
-  
-	<RelativeLayout
+
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="top"
         android:orientation="horizontal" >
 
-	<TextView
-	    android:id="@+id/catClass"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentLeft="true"
-	    android:layout_alignParentTop="true"
-	    android:gravity="right"
-	    android:textAppearance="?android:attr/textAppearanceLarge"
-	    android:textSize="40sp" /> 
-   	    
-	<TextView
-	    android:id="@+id/catSex"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentTop="true"
-	    android:layout_centerHorizontal="true"
-	    android:gravity="center"
-	    android:textAppearance="?android:attr/textAppearanceLarge"
-	    android:textSize="40sp" />
+        <TextView
+            android:id="@+id/catClass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:gravity="right"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="40sp" />
 
-	<TextView
-	    android:id="@+id/catBorn"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentRight="true"
-	    android:layout_alignParentTop="true"
-	    android:gravity="right"
-	    android:textAppearance="?android:attr/textAppearanceLarge"
-	    android:textSize="40sp" />
-	
+        <TextView
+            android:id="@+id/catSex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/catBorn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="right"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="40sp" />
     </RelativeLayout>
-   	
-	<!--horizontal separator-->
-	<View
-    android:layout_width="fill_parent"
-    android:layout_height="20dp" />
-	
-	 <EditText
-	     android:id="@+id/type"
-	     android:layout_width="match_parent"
-	     android:layout_height="wrap_content"
-	     android:textSize="30sp"
-	     android:ems="10"
-	     android:hint="@string/type"
-	     android:singleLine="true" >
 
-        <requestFocus android:layout_width="wrap_content" />
-	</EditText>
-  
-	  <EditText
-        android:id="@+id/head"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:textSize="30sp"
-        android:ems="10"
-        android:hint="@string/head"
-        android:singleLine="true" />
+    <!-- horizontal separator -->
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="20dp" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/type"
+            android:layout_width="750dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/type"
+            android:singleLine="true"
+            android:textSize="30sp" >
+
+            <requestFocus android:layout_width="wrap_content" />
+        </EditText>
+
+        <TextView
+            android:id="@+id/bodyPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="right"
+            android:textColor="@color/white"
+            android:hint="@string/bodyPoints"
+            android:textSize="40sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/head"
+            android:layout_width="750dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/head"
+            android:singleLine="true"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/headPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="right"
+            android:textColor="@color/white"
+            android:hint="@string/headPoints"
+            android:textSize="40sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/eyes"
+            android:layout_width="750dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/eyes"
+            android:singleLine="true"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/eyesPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="right"
+            android:textColor="@color/white"
+            android:hint="@string/eyesPoints"
+            android:textSize="40sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/ears"
+            android:layout_width="750dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/ears"
+            android:singleLine="true"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/earsPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="right"
+            android:textColor="@color/white"
+            android:hint="@string/earsPoints"
+            android:textSize="40sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/coat"
+            android:layout_width="750dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/coat"
+            android:singleLine="true"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/coatPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="right"
+            android:textColor="@color/white"
+            android:hint="@string/coatPoints"
+            android:textSize="40sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/tail"
+            android:layout_width="750dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/tail"
+            android:singleLine="true"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/tailPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="right"
+            android:textColor="@color/white"
+            android:hint="@string/tailPoints"
+            android:textSize="40sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/condition"
+            android:layout_width="750dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/condition"
+            android:singleLine="true"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/conditionPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="right"
+            android:textColor="@color/white"
+            android:hint="@string/conditionPoints"
+            android:textSize="40sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/impress"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/impress"
+            android:singleLine="true"
+            android:textSize="30sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/comment"
+            android:singleLine="true"
+            android:textSize="30sp" />
+    </RelativeLayout>
+
+    <!-- horizontal separator -->
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="20dp" />
+
+    <Spinner
+        android:id="@+id/mark"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:prompt="@string/mark_prompt" />
+
+    <!-- horizontal separator -->
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="20dp" />
 
     <EditText
-        android:id="@+id/eyes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:ems="10"
-        android:hint="@string/eyes"
-        android:singleLine="true" />
-
-    <EditText
-        android:id="@+id/ears"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:ems="10"
-        android:hint="@string/ears"
-        android:singleLine="true" />
-
-    <EditText
-        android:id="@+id/coat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:ems="10"
-        android:hint="@string/coat"
-        android:singleLine="true" />
-
-    <EditText
-        android:id="@+id/tail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:ems="10"
-        android:hint="@string/tail"
-        android:singleLine="true" />
-
-    <EditText
-        android:id="@+id/condition"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:ems="10"
-        android:hint="@string/condition"
-        android:singleLine="true" />
-
-    <EditText
-        android:id="@+id/impress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:ems="10"
-        android:hint="@string/impress"
-        android:singleLine="true" />
-
-    <EditText
-        android:id="@+id/comment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:ems="10"
-        android:hint="@string/comment"
-        android:singleLine="true" />
-
-    <!--horizontal separator-->
-	<View
-    	android:layout_width="fill_parent"
-   		android:layout_height="20dp" />
-   
-	<Spinner
-		android:id="@+id/mark"
-   	    android:layout_width="fill_parent"
-   	    android:layout_height="wrap_content"
-		android:prompt="@string/mark_prompt" />
-	
-	<!--horizontal separator-->
-	<View
-    android:layout_width="fill_parent"
-    android:layout_height="20dp" />
-	
-	<EditText
         android:id="@+id/rank"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
         android:ems="10"
         android:hint="@string/rank"
-        android:singleLine="true" />
-	
-	<EditText
+        android:singleLine="true"
+        android:textSize="30sp" />
+
+    <EditText
         android:id="@+id/nomination"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
         android:ems="10"
         android:hint="@string/nomination"
-        android:singleLine="true" />
-	
-	<EditText
+        android:singleLine="true"
+        android:textSize="30sp" />
+
+    <EditText
         android:id="@+id/biv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
         android:ems="10"
         android:hint="@string/biv"
-        android:singleLine="true" />	
+        android:singleLine="true"
+        android:textSize="30sp" />
 
-    <!--horizontal separator-->
-	<View
-    	android:layout_width="fill_parent"
-   		android:layout_height="20dp" />
-   
-	<Spinner
-		android:id="@+id/caption"
-   	    android:layout_width="fill_parent"
-   	    android:layout_height="wrap_content"
-		android:prompt="@string/caption_prompt" />
-	
-	<!--horizontal separator-->
-	<View
-    android:layout_width="fill_parent"
-    android:layout_height="30dp" />	
-		
-   <RelativeLayout
-   	    android:layout_width="fill_parent"
-   	    android:layout_height="wrap_content"
-   	    android:gravity="bottom"
-   	    android:orientation="horizontal"
-   	    android:textSize="30sp" >
+    <!-- horizontal separator -->
 
-   	    <!-- left horizontal separator -->
-   	    <View
-   	        android:id="@+id/left_separator"
-   	        android:layout_width="30dp"
-   	        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="20dp" />
 
-   	    <!-- right horizontal separator -->
-   	    <View
-   	        android:id="@+id/right_separator"
-   	        android:layout_width="30dp"
-   	        android:layout_height="wrap_content"
-   	        android:layout_alignParentRight="true"
-   	        android:layout_alignParentTop="true" />
-   	 
-   	    <!-- bottom horizontal separator -->
-   	    <View
-   	        android:id="@+id/bottom_separator"
-   	        android:layout_width="wrap_content"
-   	        android:layout_alignParentBottom="true"
-   	        android:layout_height="30dp" />
+    <Spinner
+        android:id="@+id/caption"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:prompt="@string/caption_prompt" />
 
-   	    <Button
-   	        android:id="@+id/backButton"
-   	        android:layout_width="wrap_content"
-   	        android:layout_height="wrap_content"
-   	        android:layout_above="@+id/bottom_separator"
-   	        android:layout_toRightOf="@+id/left_separator"
-   	        android:onClick="backButtonClicked"
-   	        android:text="@string/backButton"
-   	        android:textSize="30sp" />
+    <!-- horizontal separator -->
 
-   	    <Button
-   	        android:id="@+id/button_send"
-   	        android:layout_width="wrap_content"
-   	        android:layout_height="wrap_content"
-   	        android:layout_above="@+id/bottom_separator"
-   	        android:layout_toLeftOf="@+id/right_separator"
-   	        android:onClick="buttonClicked"
-   	        android:text="@string/button_send"
-   	        android:textSize="30sp" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="30dp" />
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:textSize="30sp" >
 
-   	    
-   	    </RelativeLayout>
+        <!-- left horizontal separator -->
 
-        
+        <View
+            android:id="@+id/left_separator"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content" />
+
+        <!-- right horizontal separator -->
+
+        <View
+            android:id="@+id/right_separator"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true" />
+
+        <!-- bottom horizontal separator -->
+
+        <View
+            android:id="@+id/bottom_separator"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true" />
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottom_separator"
+            android:layout_toRightOf="@+id/left_separator"
+            android:onClick="backButtonClicked"
+            android:text="@string/backButton"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/button_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottom_separator"
+            android:layout_toLeftOf="@+id/right_separator"
+            android:onClick="buttonClicked"
+            android:text="@string/button_send"
+            android:textSize="30sp" />
+    </RelativeLayout>
+
 </LinearLayout>

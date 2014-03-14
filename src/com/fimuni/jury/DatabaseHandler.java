@@ -1,4 +1,4 @@
-package com.example.jury;
+package com.fimuni.jury;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,11 +141,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			} while (cursor.moveToNext());
 		}
 
-		// return contact list
+		// return report list
 		return reportList;
 	}
 
-	// Updating single contact
+	// Updating single report
 	public int edit(int id, String type, String head, String eyes, String ears,
 			String coat, String tail, String condition, String impress, String comment) {
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -165,7 +165,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return db.update(TABLE_REPORTS, values, "id" + "='" + id + "'", null);
 	}
 
-	// Deleting single contact
+	// Deleting single report
 	public void deleteReport(Report report) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(TABLE_REPORTS, KEY_ID + " = ?",

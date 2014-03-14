@@ -1,4 +1,4 @@
-package com.example.jury;
+package com.fimuni.jury;
 
 public class Report {
 	int _id;

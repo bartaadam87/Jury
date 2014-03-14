@@ -14,6 +14,13 @@
     <string name="condition">Condition / Kondition / Condition</string>
     <string name="impress">Impress / Gesamteindruck / Impression</string>
     <string name="comment">Comment / Kommentar / Annotation</string>
+    <string name="bodyPoints">%1$s</string>
+    <string name="headPoints">%1$s</string>
+    <string name="eyesPoints">%1$s</string>
+    <string name="earsPoints">%1$s</string>
+    <string name="coatPoints">%1$s</string>
+    <string name="tailPoints">%1$s</string>
+    <string name="conditionPoints">%1$s</string>
     <string name="backButton">Back</string>
     <string name="rank">Rank / Rang / Rang</string>
     <string name="nomination">Nomination</string>
@@ -60,7 +67,7 @@
         <item></item>
         <item>CACIB</item>
     </string-array>
-	<string-array name="caption_arrays_class8">
+    <string-array name="caption_arrays_class8">
         <item></item>
         <item>CAPIB</item>
     </string-array>
@@ -72,4 +79,5 @@
         <item></item>
         <item>CAP</item>
     </string-array>
+
 </resources>

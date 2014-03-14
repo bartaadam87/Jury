@@ -1,5 +1,6 @@
-package com.example.jury;
+package com.fimuni.jury;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.SQLException;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +19,8 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.fimuni.jury.R;
 
 public class JuryActivity extends ListActivity {
 
@@ -59,7 +63,23 @@ public class JuryActivity extends ListActivity {
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
 
 		R.layout.title_layout);
+
+		DatabasePointsHandler myDbHelper = new DatabasePointsHandler(this);
+		myDbHelper = new DatabasePointsHandler(this);
+
+		try {
+			myDbHelper.createDataBase();
+		} catch (IOException ioe) {
+			throw new Error("Unable to create database");
+		}
 		
+		try {
+			myDbHelper.openDataBase();
+
+		} catch (SQLException sqle) {
+			throw sqle;
+		}
+
 		// Insert test to database
 //		 Log.d("Insert: ", "Inserting ..");
 //		 db.addReport(new Report("30", "MCO", "F22 (e)", "1", "01",
@@ -76,7 +96,8 @@ public class JuryActivity extends ListActivity {
 //		 db.addReport(new Report("101", "PER", "ABC", "6", "01", "23.9.1987",
 //		 "",
 //		 "", "", "", "", "", "", "", ""));
-//		 db.addReport(new Report("115", "EXO", "G(11)", "11", "01", "23.9.1987",
+//		 db.addReport(new Report("115", "EXO", "G(11)", "11", "01",
+//		 "23.9.1987",
 //		 "Type", "Small and round", "Blue and ugly", "Dont even ask",
 //		 "Coat nice", "Tail long", "Condition bad", "Impress good",
 //		 "Comment"));
@@ -109,10 +130,10 @@ public class JuryActivity extends ListActivity {
 					+ rep.getSex() + " / " + "Born: " + rep.getBorn();
 			names.add(log);
 		}
-		
-//		Insert Jury name into SQL database
+
+		// Insert Jury name into SQL database
 //		 Log.d("Insert: ", "Inserting ..");
-//		 dbj.addJury(new Jury("Simon Testikov"));
+//		 dbj.addJury(new Jury("Adam Barta"));
 
 		// TextView juryNameTv = (TextView) getWindow().findViewById(
 		// R.id.title_right);
@@ -129,7 +150,11 @@ public class JuryActivity extends ListActivity {
 		String juryName = jury.getName();
 		TextView nameTv = (TextView) findViewById(R.id.title_right);
 		displayName(juryName, nameTv);
-		
+
+		TextView titleLeft = (TextView) findViewById(R.id.title_left);
+		titleLeft.setTextColor(getResources().getColor(R.color.white));
+		nameTv.setTextColor(getResources().getColor(R.color.white));
+
 		setListAdapter(new MyAdapater(this, R.layout.list_layout, names));
 	}
 

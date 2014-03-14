@@ -1,4 +1,4 @@
-package com.example.jury;
+package com.fimuni.jury;
 
 import android.content.ContentValues;
 import android.content.Context;
