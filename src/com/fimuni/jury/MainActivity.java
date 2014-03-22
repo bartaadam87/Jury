@@ -1,6 +1,6 @@
 package com.fimuni.jury;
 
-import com.fimuni.jury.R;
+import org.json.simple.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,12 +8,17 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.accessibility.CaptioningManager;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.fimuni.jury.ConnectorActivity.ClientSender;
 
 public class MainActivity extends Activity {
 
@@ -24,6 +29,9 @@ public class MainActivity extends Activity {
 	// public static final String EXTRA_TYPE = "type";
 	// public static final String EXTRA_HEAD = "head";
 	public static final String ID = "id";
+
+	ConnectorActivity connect = new ConnectorActivity();
+	ClientSender clientSender;
 
 	DatabaseHandler db = new DatabaseHandler(this);
 	DatabaseJuryHandler dbj = new DatabaseJuryHandler(this);
@@ -53,7 +61,14 @@ public class MainActivity extends Activity {
 						R.layout.spinner_layout);
 		markadapter.setDropDownViewResource(R.layout.spinner_layout);
 		mark.setAdapter(markadapter);
-		
+
+		Spinner rank = (Spinner) findViewById(R.id.rank);
+		ArrayAdapter<CharSequence> rankadapter = ArrayAdapter
+				.createFromResource(this, R.array.rank_arrays,
+						R.layout.spinner_layout);
+		rankadapter.setDropDownViewResource(R.layout.spinner_layout);
+		rank.setAdapter(rankadapter);
+
 		Jury jury = dbj.getJury(1);
 		String juryName = jury.getName();
 		TextView nameTv = (TextView) findViewById(R.id.title_right);
@@ -62,7 +77,7 @@ public class MainActivity extends Activity {
 		nameTv.setTextColor(getResources().getColor(R.color.white));
 		TextView titleLeft = (TextView) findViewById(R.id.title_left);
 		titleLeft.setTextColor(getResources().getColor(R.color.white));
-		
+
 		// int catId = Integer.parseInt(id);
 		// String info = i.getStringExtra(INFO);
 		// String juryName = i.getStringExtra(JURY_NAME);
@@ -73,7 +88,7 @@ public class MainActivity extends Activity {
 		Intent i = getIntent();
 		String id = i.getStringExtra(ID);
 
-		//Get stuff to fill form header
+		// Get stuff to fill form header
 		Report rep = db.getReport(Integer.parseInt(id));
 		String catNo = rep.getNo();
 		String catBreed = rep.getBreed();
@@ -91,7 +106,7 @@ public class MainActivity extends Activity {
 		String catImpress = rep.getImpress();
 		String catComment = rep.getComment();
 
-		//points for each breed
+		// points for each breed
 		Standard standard = dbp.getStandard(catBreed);
 		String headPoints = standard.getHead();
 		String eyesPoints = standard.getEyes();
@@ -100,7 +115,7 @@ public class MainActivity extends Activity {
 		String coatPoints = standard.getCoat();
 		String tailPoints = standard.getTail();
 		String conditionPoints = standard.getCondition();
-		
+
 		TextView catNoTv = (TextView) findViewById(R.id.catNr);
 		TextView catBreedTv = (TextView) findViewById(R.id.catBreed);
 		TextView catCodeTv = (TextView) findViewById(R.id.catCode);
@@ -125,7 +140,7 @@ public class MainActivity extends Activity {
 		EditText condition = (EditText) findViewById(R.id.condition);
 		EditText impress = (EditText) findViewById(R.id.impress);
 		EditText comment = (EditText) findViewById(R.id.comment);
-		
+
 		// int No = Integer.parseInt(catNo);
 		//
 		displayNr(catNo, catNoTv);
@@ -142,7 +157,7 @@ public class MainActivity extends Activity {
 		displayCoatP(coatPoints, coatPointsTv);
 		displayTailP(tailPoints, tailPointsTv);
 		displayConditionP(conditionPoints, conditionPointsTv);
-		
+
 		type.setText(catType);
 		head.setText(catHead);
 		eyes.setText(catEyes);
@@ -152,19 +167,37 @@ public class MainActivity extends Activity {
 		condition.setText(catCondition);
 		impress.setText(catImpress);
 		comment.setText(catComment);
-		
+
 		// Funkcni vypis z databaze!
 		// DatabaseHandler db = new DatabaseHandler(this);
 		// Report rep2 = db.getReport(1);
 		// EditText typeEt = (EditText) findViewById(R.id.type);
 		// typeEt.setText(rep2.getType());
 
+		findViewById(R.id.captionComment).setVisibility(View.INVISIBLE);
+		
 		Spinner caption = (Spinner) findViewById(R.id.caption);
 		ArrayAdapter<CharSequence> captionadapter = ArrayAdapter
 				.createFromResource(this, selectCatClass(catClass),
 						R.layout.spinner_layout);
 		captionadapter.setDropDownViewResource(R.layout.spinner_layout);
 		caption.setAdapter(captionadapter);
+		
+		caption.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+	        @Override
+	        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+	            if (position == 0){
+	                findViewById(R.id.captionComment).setVisibility(View.VISIBLE);
+	            } else {
+	            	findViewById(R.id.captionComment).setVisibility(View.INVISIBLE);
+	            }
+	        }
+
+	        @Override
+	        public void onNothingSelected(AdapterView<?> parent) {
+
+	        }
+	    });
 	}
 
 	protected void displayNr(String nr, TextView tv) {
@@ -208,19 +241,19 @@ public class MainActivity extends Activity {
 		String text = res.getString(R.string.jury_name, jn);
 		tv.setText(text);
 	}
-	
+
 	protected void displayBodyP(String bp, TextView tv) {
 		Resources res = getResources();
 		String text = res.getString(R.string.bodyPoints, bp);
 		tv.setText(text);
 	}
-	
+
 	protected void displayHeadP(String hp, TextView tv) {
 		Resources res = getResources();
 		String text = res.getString(R.string.headPoints, hp);
 		tv.setText(text);
 	}
-	
+
 	protected void displayEyesP(String ep, TextView tv) {
 		Resources res = getResources();
 		String text = res.getString(R.string.eyesPoints, ep);
@@ -232,55 +265,73 @@ public class MainActivity extends Activity {
 		String text = res.getString(R.string.earsPoints, ep);
 		tv.setText(text);
 	}
-	
+
 	protected void displayCoatP(String cp, TextView tv) {
 		Resources res = getResources();
 		String text = res.getString(R.string.coatPoints, cp);
 		tv.setText(text);
 	}
-	
+
 	protected void displayTailP(String tp, TextView tv) {
 		Resources res = getResources();
 		String text = res.getString(R.string.tailPoints, tp);
 		tv.setText(text);
 	}
-	
+
 	protected void displayConditionP(String cp, TextView tv) {
 		Resources res = getResources();
 		String text = res.getString(R.string.conditionPoints, cp);
 		tv.setText(text);
 	}
-	
+
 	// DOPLNIT!!
 	private int selectCatClass(String cc) {
 		if (cc.equals("1") || cc.equals("2") || cc.equals("11")
 				|| cc.equals("12") || cc.equals("13a") || cc.equals("13b")
-				|| cc.equals("13c") || cc.equals("14"))
+				|| cc.equals("13c") || cc.equals("14")) {
+			findViewById(R.id.caption).setVisibility(View.GONE);
 			return R.array.caption_arrays_classNo;
+		}
 
-		if (cc.equals("3"))
+		if (cc.equals("3")) {
+			findViewById(R.id.caption).setVisibility(View.VISIBLE);
 			return R.array.caption_arrays_class3;
+		}
 
-		if (cc.equals("4"))
+		if (cc.equals("4")) {
+			findViewById(R.id.caption).setVisibility(View.VISIBLE);
 			return R.array.caption_arrays_class4;
+		}
 
-		if (cc.equals("5"))
+		if (cc.equals("5")) {
+			findViewById(R.id.caption).setVisibility(View.VISIBLE);
 			return R.array.caption_arrays_class5;
+		}
 
-		if (cc.equals("6"))
+		if (cc.equals("6")){
+			findViewById(R.id.caption).setVisibility(View.VISIBLE);
 			return R.array.caption_arrays_class6;
+		}
 
-		if (cc.equals("7"))
+		if (cc.equals("7")){
+			findViewById(R.id.caption).setVisibility(View.VISIBLE);
 			return R.array.caption_arrays_class7;
+		}
 
-		if (cc.equals("8"))
+		if (cc.equals("8")){
+			findViewById(R.id.caption).setVisibility(View.VISIBLE);
 			return R.array.caption_arrays_class8;
+		}
 
-		if (cc.equals("9"))
+		if (cc.equals("9")){
+			findViewById(R.id.caption).setVisibility(View.VISIBLE);
 			return R.array.caption_arrays_class9;
+		}
 
-		if (cc.equals("10"))
+		if (cc.equals("10")){
+			findViewById(R.id.caption).setVisibility(View.VISIBLE);
 			return R.array.caption_arrays_class10;
+		}
 
 		return 0;
 	}
@@ -309,6 +360,8 @@ public class MainActivity extends Activity {
 
 	public void buttonClicked(View button) {
 		Intent i = getIntent();
+		TextView catNoTv = (TextView) findViewById(R.id.catNr);
+		String no = catNoTv.getText().toString();
 		String id = i.getStringExtra(ID);
 		EditText typeEt = (EditText) findViewById(R.id.type);
 		String getCatType = typeEt.getText().toString();
@@ -331,9 +384,38 @@ public class MainActivity extends Activity {
 		db.edit(Integer.parseInt(id), getCatType, getCatHead, getCatEyes,
 				getCatEars, getCatCoat, getCatTail, getCatCondition,
 				getCatImpress, getCatComment);
+		// Send data to server
+		String messageToSend = writeForm(no, getCatType, getCatHead,
+				getCatEyes, getCatEars, getCatCoat, getCatTail,
+				getCatCondition, getCatImpress, getCatComment)
+				+ System.getProperty("line.separator");
+		// if (clientSender != null) {
+		// System.out.println(clientSender.getStatus());
+		// }
+		// ClientSender clientSender = connect.new ClientSender(
+		// this.getApplicationContext());
+		// clientSender.execute(messageToSend);
+
 		startListActivity();
 		Toast.makeText(this, R.string.sendToast, Toast.LENGTH_LONG).show();
 		this.finish();
+	}
+
+	public JSONObject writeForm(String no, String type, String head,
+			String eyes, String ears, String coat, String tail,
+			String condition, String impress, String comment) {
+		JSONObject object = new JSONObject();
+		object.put("no", no);
+		object.put("type", type);
+		object.put("head", head);
+		object.put("eyes", eyes);
+		object.put("ears", ears);
+		object.put("coat", coat);
+		object.put("tail", tail);
+		object.put("condition", condition);
+		object.put("impress", impress);
+		object.put("comment", comment);
+		return object;
 	}
 
 }

@@ -87,11 +87,11 @@ public class JuryActivity extends ListActivity {
 //		 "Type", "Small and round", "Blue and ugly", "Dont even ask",
 //		 "Coat nice", "Tail long", "Condition bad", "Impress good",
 //		 "Comment"));
-//		 db.addReport(new Report("35", "MCO", "F12", "2", "01", "23.9.1987",
+//		 db.addReport(new Report("35", "BUR", "F12", "2", "01", "23.9.1987",
 //		 "Type", "Small and round", "Blue and ugly", "Dont even ask",
 //		 "Coat nice", "Tail long", "Condition bad", "Impress good",
 //		 "Comment"));
-//		 db.addReport(new Report("70", "MCO", "b", "7", "01", "23.9.1987", "",
+//		 db.addReport(new Report("70", "RAG", "b", "7", "01", "23.9.1987", "",
 //		 "", "", "", "", "", "", "", ""));
 //		 db.addReport(new Report("101", "PER", "ABC", "6", "01", "23.9.1987",
 //		 "",
@@ -101,7 +101,7 @@ public class JuryActivity extends ListActivity {
 //		 "Type", "Small and round", "Blue and ugly", "Dont even ask",
 //		 "Coat nice", "Tail long", "Condition bad", "Impress good",
 //		 "Comment"));
-//		 db.addReport(new Report("156", "EXO", "ABC", "12", "01", "23.9.1987",
+//		 db.addReport(new Report("156", "RUS", "ABC", "12", "01", "23.9.1987",
 //		 "Type", "Small and round", "Blue and ugly", "Dont even ask",
 //		 "Coat nice", "Tail long", "Condition bad", "Impress good",
 //		 "Comment"));
@@ -219,11 +219,18 @@ public class JuryActivity extends ListActivity {
 					|| rep.getEyes().isEmpty() || rep.getEars().isEmpty()
 					|| rep.getCoat().isEmpty() || rep.getTail().isEmpty()
 					|| rep.getCondition().isEmpty()
-					|| rep.getImpress().isEmpty() || rep.getComment().isEmpty()) {
+					|| rep.getImpress().isEmpty()) {
 				return false;
 			}
 			return true;
 		}
+		
+//		public boolean isFilledBIV(Report rep) {
+//			if (rep.getBIV().isEmpty()) {
+//				return false;
+//			}
+//			return true;
+//		}
 
 		// public View getView(View convertView, int position, ViewGroup parent)
 		// {

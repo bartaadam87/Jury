@@ -111,10 +111,9 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:gravity="right"
-            android:textColor="@color/white"
             android:hint="@string/bodyPoints"
+            android:textColor="@color/white"
             android:textSize="40sp" />
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -139,8 +138,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:gravity="right"
-            android:textColor="@color/white"
             android:hint="@string/headPoints"
+            android:textColor="@color/white"
             android:textSize="40sp" />
     </RelativeLayout>
 
@@ -166,8 +165,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:gravity="right"
-            android:textColor="@color/white"
             android:hint="@string/eyesPoints"
+            android:textColor="@color/white"
             android:textSize="40sp" />
     </RelativeLayout>
 
@@ -193,8 +192,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:gravity="right"
-            android:textColor="@color/white"
             android:hint="@string/earsPoints"
+            android:textColor="@color/white"
             android:textSize="40sp" />
     </RelativeLayout>
 
@@ -220,8 +219,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:gravity="right"
-            android:textColor="@color/white"
             android:hint="@string/coatPoints"
+            android:textColor="@color/white"
             android:textSize="40sp" />
     </RelativeLayout>
 
@@ -247,8 +246,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:gravity="right"
-            android:textColor="@color/white"
             android:hint="@string/tailPoints"
+            android:textColor="@color/white"
             android:textSize="40sp" />
     </RelativeLayout>
 
@@ -274,8 +273,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:gravity="right"
-            android:textColor="@color/white"
             android:hint="@string/conditionPoints"
+            android:textColor="@color/white"
             android:textSize="40sp" />
     </RelativeLayout>
 
@@ -317,11 +316,30 @@
         android:layout_width="fill_parent"
         android:layout_height="20dp" />
 
-    <Spinner
-        android:id="@+id/mark"
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:prompt="@string/mark_prompt" />
+        android:gravity="top"
+        android:orientation="horizontal" >
+
+        <Spinner
+            android:id="@+id/mark"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:gravity="left"
+            android:prompt="@string/mark_prompt" />
+
+        <Spinner
+            android:id="@+id/rank"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="right"
+            android:prompt="@string/rank_prompt" />
+    </RelativeLayout>
 
     <!-- horizontal separator -->
 
@@ -329,32 +347,31 @@
         android:layout_width="fill_parent"
         android:layout_height="20dp" />
 
-    <EditText
-        android:id="@+id/rank"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/rank"
-        android:singleLine="true"
-        android:textSize="30sp" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal" >
 
-    <EditText
-        android:id="@+id/nomination"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/nomination"
-        android:singleLine="true"
-        android:textSize="30sp" />
+        <CheckBox
+            android:id="@+id/biv"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="100dp"
+            android:scaleX="2.0"
+            android:scaleY="2.0"
+            android:text="@string/biv" />
 
-    <EditText
-        android:id="@+id/biv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/biv"
-        android:singleLine="true"
-        android:textSize="30sp" />
+        <CheckBox
+            android:id="@+id/nomination"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="100dp"
+            android:scaleX="2.0"
+            android:scaleY="2.0"
+            android:text="@string/nomination" />
+    </RelativeLayout>
 
     <!-- horizontal separator -->
 
@@ -372,23 +389,32 @@
 
     <View
         android:layout_width="fill_parent"
-        android:layout_height="30dp" />
+        android:layout_height="10dp" />
+
+    <EditText
+        android:id="@+id/captionComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/captionComment"
+        android:singleLine="true"
+        android:textSize="30sp" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom"
+        android:gravity="top"
         android:orientation="horizontal"
         android:textSize="30sp" >
 
-        <!-- left horizontal separator -->
+        <!-- left vertical separator -->
 
         <View
             android:id="@+id/left_separator"
             android:layout_width="30dp"
             android:layout_height="wrap_content" />
 
-        <!-- right horizontal separator -->
+        <!-- right vertical separator -->
 
         <View
             android:id="@+id/right_separator"

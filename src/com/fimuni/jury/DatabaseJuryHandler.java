@@ -36,10 +36,14 @@ public class DatabaseJuryHandler extends SQLiteOpenHelper {
 
 	}
 
-	// Add report
+	// Add jury
 	void addJury(Jury jury) {
 		SQLiteDatabase db = this.getWritableDatabase();
-
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAMES);
+		String CREATE_NAMES_TABLE = "CREATE TABLE " + TABLE_NAMES + "("
+				+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" + ")";
+		db.execSQL(CREATE_NAMES_TABLE);
+		
 		ContentValues values = new ContentValues();
 		values.put(KEY_NAME, jury.getName());
 
@@ -48,7 +52,7 @@ public class DatabaseJuryHandler extends SQLiteOpenHelper {
 		db.close();
 	}
 
-	// Get report
+	// Get jury
 	Jury getJury(int id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 

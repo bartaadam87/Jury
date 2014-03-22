@@ -23,8 +23,8 @@
     <string name="conditionPoints">%1$s</string>
     <string name="backButton">Back</string>
     <string name="rank">Rank / Rang / Rang</string>
-    <string name="nomination">Nomination</string>
-    <string name="biv">Best in variety or show</string>
+    <string name="nomination"> Nomination</string>
+    <string name="biv"> BIV</string>
     <string name="nr">No. %1$s</string>
     <string name="br">Breed: %1$s</string>
     <string name="co">%1$s</string>
@@ -35,11 +35,27 @@
     <string name="backToast">Back!</string>
     <string name="sendToast">Success!</string>
     <string name="mark_prompt">Choose a mark</string>
+    <string name="rank_prompt">Choose rank</string>
+    <string name="insert_ip">Server IP address</string>
+    <string name="insert_name">Jury name</string>
+    <string name="buttonConnect">Connect</string>
+    <string name="buttonStart">Start</string>
+    <string name="captionComment">Write reason if no title</string>
 
     <string-array name="mark_arrays">
-        <item>Mark: EX1</item>
-        <item>Mark: EX2</item>
-        <item>Mark: EX3</item>
+        <item>EX</item>
+        <item>VG</item>
+        <item>G</item>
+        <item>HP</item>
+        <item>Disqualified</item>
+    </string-array>
+    
+    <string-array name="rank_arrays">
+        <item></item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
     </string-array>
 
     <string name="caption_prompt">Choose a mark</string>
