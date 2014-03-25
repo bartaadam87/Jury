@@ -345,7 +345,7 @@
 
     <View
         android:layout_width="fill_parent"
-        android:layout_height="20dp" />
+        android:layout_height="5dp" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -377,26 +377,39 @@
 
     <View
         android:layout_width="fill_parent"
-        android:layout_height="20dp" />
+        android:layout_height="5dp" />
 
+    <EditText
+        android:id="@+id/note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/note"
+        android:singleLine="true"
+        android:textSize="30sp" />
+    
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="20dp" />
+    
     <Spinner
-        android:id="@+id/caption"
+        android:id="@+id/title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:prompt="@string/caption_prompt" />
+        android:prompt="@string/title_prompt" />
 
     <!-- horizontal separator -->
 
     <View
         android:layout_width="fill_parent"
-        android:layout_height="10dp" />
+        android:layout_height="5dp" />
 
     <EditText
-        android:id="@+id/captionComment"
+        android:id="@+id/reason"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/captionComment"
+        android:hint="@string/titleComment"
         android:singleLine="true"
         android:textSize="30sp" />
 

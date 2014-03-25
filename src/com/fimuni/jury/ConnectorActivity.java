@@ -86,17 +86,17 @@ public class ConnectorActivity extends Activity {
 		return true;
 	}
 
-	@Override
-	protected void onStop() {
-		super.onStop();
-		try {
-			socket.close();
-			System.out.println("Socket closed!");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
+//	@Override
+//	protected void onStop() {
+//		super.onStop();
+//		try {
+//			socket.close();
+//			System.out.println("Socket closed!");
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
+	
 	// public JSONObject writeJSON() throws JSONException {
 	// JSONObject object = new JSONObject();
 	// object.put("no", "1");

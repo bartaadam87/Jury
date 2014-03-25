@@ -40,8 +40,9 @@
     <string name="insert_name">Jury name</string>
     <string name="buttonConnect">Connect</string>
     <string name="buttonStart">Start</string>
-    <string name="captionComment">Write reason if no title</string>
-
+    <string name="titleComment">Write reason if no title</string>
+	<string name="note">Note</string>
+    
     <string-array name="mark_arrays">
         <item>EX</item>
         <item>VG</item>
@@ -58,40 +59,40 @@
         <item>4</item>
     </string-array>
 
-    <string name="caption_prompt">Choose a mark</string>
+    <string name="title_prompt">Choose a mark</string>
 
-    <string-array name="caption_arrays_classNo">
+    <string-array name="title_arrays_classNo">
         <item></item>
     </string-array>
-    <string-array name="caption_arrays_class3">
+    <string-array name="title_arrays_class3">
         <item></item>
         <item>CACS</item>
     </string-array>
-    <string-array name="caption_arrays_class4">
+    <string-array name="title_arrays_class4">
         <item></item>
         <item>CAPS</item>
     </string-array>
-    <string-array name="caption_arrays_class5">
+    <string-array name="title_arrays_class5">
         <item></item>
         <item>CAGCIB</item>
     </string-array>
-    <string-array name="caption_arrays_class6">
+    <string-array name="title_arrays_class6">
         <item></item>
         <item>CAGPIB</item>
     </string-array>
-    <string-array name="caption_arrays_class7">
+    <string-array name="title_arrays_class7">
         <item></item>
         <item>CACIB</item>
     </string-array>
-    <string-array name="caption_arrays_class8">
+    <string-array name="title_arrays_class8">
         <item></item>
         <item>CAPIB</item>
     </string-array>
-    <string-array name="caption_arrays_class9">
+    <string-array name="title_arrays_class9">
         <item></item>
         <item>CAC</item>
     </string-array>
-    <string-array name="caption_arrays_class10">
+    <string-array name="title_arrays_class10">
         <item></item>
         <item>CAP</item>
     </string-array>

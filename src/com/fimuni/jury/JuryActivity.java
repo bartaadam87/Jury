@@ -72,7 +72,7 @@ public class JuryActivity extends ListActivity {
 		} catch (IOException ioe) {
 			throw new Error("Unable to create database");
 		}
-		
+
 		try {
 			myDbHelper.openDataBase();
 
@@ -86,25 +86,25 @@ public class JuryActivity extends ListActivity {
 //		 "23.9.1987",
 //		 "Type", "Small and round", "Blue and ugly", "Dont even ask",
 //		 "Coat nice", "Tail long", "Condition bad", "Impress good",
-//		 "Comment"));
+//		 "Comment", "mark", "rank", "biv", "nomination", "note",
+//		 "EX", "reason"));
 //		 db.addReport(new Report("35", "BUR", "F12", "2", "01", "23.9.1987",
 //		 "Type", "Small and round", "Blue and ugly", "Dont even ask",
 //		 "Coat nice", "Tail long", "Condition bad", "Impress good",
-//		 "Comment"));
+//		 "Comment", "", "", "", "", "", "", ""));
 //		 db.addReport(new Report("70", "RAG", "b", "7", "01", "23.9.1987", "",
-//		 "", "", "", "", "", "", "", ""));
+//		 "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""));
 //		 db.addReport(new Report("101", "PER", "ABC", "6", "01", "23.9.1987",
-//		 "",
-//		 "", "", "", "", "", "", "", ""));
+//		 "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""));
 //		 db.addReport(new Report("115", "EXO", "G(11)", "11", "01",
 //		 "23.9.1987",
 //		 "Type", "Small and round", "Blue and ugly", "Dont even ask",
 //		 "Coat nice", "Tail long", "Condition bad", "Impress good",
-//		 "Comment"));
+//		 "Comment", "", "", "", "", "", "", ""));
 //		 db.addReport(new Report("156", "RUS", "ABC", "12", "01", "23.9.1987",
 //		 "Type", "Small and round", "Blue and ugly", "Dont even ask",
 //		 "Coat nice", "Tail long", "Condition bad", "Impress good",
-//		 "Comment"));
+//		 "Comment", "", "", "", "", "", "", ""));
 
 		// Reading from Log
 		Log.d("Reading: ", "Reading stuff..");
@@ -119,7 +119,11 @@ public class JuryActivity extends ListActivity {
 					+ " ,Ears :" + rep.getEars() + " ,Coat: " + rep.getCoat()
 					+ " ,Tail: " + rep.getTail() + " ,Condition: "
 					+ rep.getCondition() + " , Impress: " + rep.getImpress()
-					+ " ,Comment: " + rep.getComment();
+					+ " ,Comment: " + rep.getComment() + " ,Mark: "
+					+ rep.getMark() + " ,Rank: " + rep.getRank() + " ,BIV: "
+					+ rep.getBiv() + " ,Nomination: " + rep.getNomination()
+					+ " ,Note: " + rep.getNote() + " ,Title: "
+					+ rep.getTitle() + " ,Reason: " + rep.getReason();
 			Log.d("Report: ", log);
 		}
 
@@ -132,8 +136,8 @@ public class JuryActivity extends ListActivity {
 		}
 
 		// Insert Jury name into SQL database
-//		 Log.d("Insert: ", "Inserting ..");
-//		 dbj.addJury(new Jury("Adam Barta"));
+		// Log.d("Insert: ", "Inserting ..");
+		// dbj.addJury(new Jury("Adam Barta"));
 
 		// TextView juryNameTv = (TextView) getWindow().findViewById(
 		// R.id.title_right);
@@ -203,9 +207,21 @@ public class JuryActivity extends ListActivity {
 						false);
 				Report rep = db.getReport(position + 1);
 				v.setText(getItem(position));
+
 				if (isFilled(rep)) {
 					v.setBackgroundColor(getResources().getColor(R.color.green));
 					v.setTextColor(Color.BLACK);
+				}
+
+				if (isFilledNote(rep)) {
+					v.setBackgroundColor(getResources()
+							.getColor(R.color.yellow));
+					v.setTextColor(Color.BLACK);
+				}
+				
+				if (isFilledBiv(rep) || (isFilledBiv(rep) && isFilledNote(rep))) {
+					v.setBackgroundColor(getResources().getColor(R.color.blue));
+					v.setTextColor(Color.WHITE);
 				}
 				return v;
 			}
@@ -224,13 +240,20 @@ public class JuryActivity extends ListActivity {
 			}
 			return true;
 		}
-		
-//		public boolean isFilledBIV(Report rep) {
-//			if (rep.getBIV().isEmpty()) {
-//				return false;
-//			}
-//			return true;
-//		}
+
+		public boolean isFilledNote(Report rep) {
+			if (!rep.getNote().isEmpty() && isFilled(rep) != false) {
+				return true;
+			}
+			return false;
+		}
+
+		public boolean isFilledBiv(Report rep) {
+			if (rep.getBiv().equals("true") && isFilled(rep) == true) {
+				return true;
+			}
+			return false;
+		}
 
 		// public View getView(View convertView, int position, ViewGroup parent)
 		// {

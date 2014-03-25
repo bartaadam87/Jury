@@ -8,11 +8,10 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.accessibility.CaptioningManager;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -105,7 +104,14 @@ public class MainActivity extends Activity {
 		String catCondition = rep.getCondition();
 		String catImpress = rep.getImpress();
 		String catComment = rep.getComment();
-
+		String catMark = rep.getMark();
+		String catRank = rep.getRank();
+		String catBiv = rep.getBiv();
+		String catNomination = rep.getNomination();
+		String catNote = rep.getNote();
+		String catTitle = rep.getTitle();
+		String catReason = rep.getReason();
+		
 		// points for each breed
 		Standard standard = dbp.getStandard(catBreed);
 		String headPoints = standard.getHead();
@@ -140,6 +146,14 @@ public class MainActivity extends Activity {
 		EditText condition = (EditText) findViewById(R.id.condition);
 		EditText impress = (EditText) findViewById(R.id.impress);
 		EditText comment = (EditText) findViewById(R.id.comment);
+		
+		setMark(catMark);
+		setRank(catRank);
+		checkBiv(catBiv);
+		checkNomination(catNomination);
+		setTitle(catTitle);
+		
+		EditText note = (EditText) findViewById(R.id.note);
 
 		// int No = Integer.parseInt(catNo);
 		//
@@ -167,6 +181,7 @@ public class MainActivity extends Activity {
 		condition.setText(catCondition);
 		impress.setText(catImpress);
 		comment.setText(catComment);
+		note.setText(catNote);
 
 		// Funkcni vypis z databaze!
 		// DatabaseHandler db = new DatabaseHandler(this);
@@ -174,30 +189,31 @@ public class MainActivity extends Activity {
 		// EditText typeEt = (EditText) findViewById(R.id.type);
 		// typeEt.setText(rep2.getType());
 
-		findViewById(R.id.captionComment).setVisibility(View.INVISIBLE);
-		
-		Spinner caption = (Spinner) findViewById(R.id.caption);
-		ArrayAdapter<CharSequence> captionadapter = ArrayAdapter
+		findViewById(R.id.reason).setVisibility(View.INVISIBLE);
+
+		Spinner title = (Spinner) findViewById(R.id.title);
+		ArrayAdapter<CharSequence> titleadapter = ArrayAdapter
 				.createFromResource(this, selectCatClass(catClass),
 						R.layout.spinner_layout);
-		captionadapter.setDropDownViewResource(R.layout.spinner_layout);
-		caption.setAdapter(captionadapter);
-		
-		caption.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-	        @Override
-	        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-	            if (position == 0){
-	                findViewById(R.id.captionComment).setVisibility(View.VISIBLE);
-	            } else {
-	            	findViewById(R.id.captionComment).setVisibility(View.INVISIBLE);
-	            }
-	        }
+		titleadapter.setDropDownViewResource(R.layout.spinner_layout);
+		title.setAdapter(titleadapter);
 
-	        @Override
-	        public void onNothingSelected(AdapterView<?> parent) {
+		title.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				if (position == 0) {
+					findViewById(R.id.reason).setVisibility(View.VISIBLE);
+				} else {
+					findViewById(R.id.reason).setVisibility(View.INVISIBLE);
+				}
+			}
 
-	        }
-	    });
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+
+			}
+		});
 	}
 
 	protected void displayNr(String nr, TextView tv) {
@@ -283,54 +299,115 @@ public class MainActivity extends Activity {
 		String text = res.getString(R.string.conditionPoints, cp);
 		tv.setText(text);
 	}
+	
+	protected void checkBiv(String str) {
+	    if (str.equals("true")) {
+	        CheckBox checkBox = (CheckBox) findViewById(R.id.biv);
+	        checkBox.setChecked(true);
+	    }
+	}
+	
+	protected void checkNomination(String str) {
+	    if (str.equals("true")) {
+	        CheckBox checkBox = (CheckBox) findViewById(R.id.nomination);
+	        checkBox.setChecked(true);
+	    }
+	}
+	
+	protected void setMark(String str) {
+		Spinner mark = (Spinner) findViewById(R.id.mark);
+		if (str.equals("EX")) {
+			mark.setSelection(0);
+		}
+		if (str.equals("VG")) {
+			mark.setSelection(1);
+		}
+		if (str.equals("G")) {
+			mark.setSelection(2);
+		}
+		if (str.equals("HP")) {
+			mark.setSelection(3);
+		}
+		if (str.equals("Disqualified")) {
+			mark.setSelection(4);
+		}
+	}
+	
+	protected void setRank(String str) {
+		Spinner rank = (Spinner) findViewById(R.id.rank);
+		if (str.equals("")) {
+			rank.setSelection(0);
+		}
+		if (str.equals(1)) {
+			rank.setSelection(1);
+		}
+		if (str.equals(2)) {
+			rank.setSelection(2);
+		}
+		if (str.equals(3)) {
+			rank.setSelection(3);
+		}
+		if (str.equals(4)) {
+			rank.setSelection(4);
+		}
+	}
+	
+	protected void setTitle(String str) {
+		Spinner title = (Spinner) findViewById(R.id.title);
+		if (str.equals("") || str.isEmpty()) {
+			title.setSelection(0);
+		}else{
+			title.setSelection(1);
+		}
+	}
 
 	// DOPLNIT!!
 	private int selectCatClass(String cc) {
 		if (cc.equals("1") || cc.equals("2") || cc.equals("11")
 				|| cc.equals("12") || cc.equals("13a") || cc.equals("13b")
 				|| cc.equals("13c") || cc.equals("14")) {
-			findViewById(R.id.caption).setVisibility(View.GONE);
-			return R.array.caption_arrays_classNo;
+			findViewById(R.id.title).setVisibility(View.GONE);
+			return R.array.title_arrays_classNo;
 		}
 
 		if (cc.equals("3")) {
-			findViewById(R.id.caption).setVisibility(View.VISIBLE);
-			return R.array.caption_arrays_class3;
+			findViewById(R.id.title).setVisibility(View.VISIBLE);
+			return R.array.title_arrays_class3;
 		}
 
 		if (cc.equals("4")) {
-			findViewById(R.id.caption).setVisibility(View.VISIBLE);
-			return R.array.caption_arrays_class4;
+			findViewById(R.id.title).setVisibility(View.VISIBLE);
+			return R.array.title_arrays_class4;
 		}
 
 		if (cc.equals("5")) {
-			findViewById(R.id.caption).setVisibility(View.VISIBLE);
-			return R.array.caption_arrays_class5;
+			findViewById(R.id.title).setVisibility(View.VISIBLE);
+			return R.array.title_arrays_class5;
 		}
 
-		if (cc.equals("6")){
-			findViewById(R.id.caption).setVisibility(View.VISIBLE);
-			return R.array.caption_arrays_class6;
+		if (cc.equals("6")) {
+			findViewById(R.id.title).setVisibility(View.VISIBLE);
+			return R.array.title_arrays_class6;
 		}
 
-		if (cc.equals("7")){
-			findViewById(R.id.caption).setVisibility(View.VISIBLE);
-			return R.array.caption_arrays_class7;
+		if (cc.equals("7")) {
+			findViewById(R.id.title).setVisibility(View.VISIBLE);
+			return R.array.title_arrays_class7;
 		}
 
-		if (cc.equals("8")){
-			findViewById(R.id.caption).setVisibility(View.VISIBLE);
-			return R.array.caption_arrays_class8;
+		if (cc.equals("8")) {
+			findViewById(R.id.title).setVisibility(View.VISIBLE);
+			return R.array.title_arrays_class8;
 		}
 
-		if (cc.equals("9")){
-			findViewById(R.id.caption).setVisibility(View.VISIBLE);
-			return R.array.caption_arrays_class9;
+		if (cc.equals("9")) {
+			findViewById(R.id.title).setVisibility(View.VISIBLE);
+			return R.array.title_arrays_class9;
 		}
 
-		if (cc.equals("10")){
-			findViewById(R.id.caption).setVisibility(View.VISIBLE);
-			return R.array.caption_arrays_class10;
+		if (cc.equals("10")) {
+			findViewById(R.id.title).setVisibility(View.VISIBLE);
+			return R.array.title_arrays_class10;
 		}
 
 		return 0;
@@ -381,20 +458,39 @@ public class MainActivity extends Activity {
 		String getCatImpress = impressEt.getText().toString();
 		EditText commentEt = (EditText) findViewById(R.id.comment);
 		String getCatComment = commentEt.getText().toString();
+		Spinner mark = (Spinner) findViewById(R.id.mark);
+		String getCatMark = mark.getSelectedItem().toString();
+		Spinner rank = (Spinner) findViewById(R.id.rank);
+		String getCatRank = rank.getSelectedItem().toString();
+		CheckBox biv = (CheckBox) findViewById(R.id.biv);
+		String getCatBiv = Boolean.toString(biv.isChecked());
+		CheckBox nomination = (CheckBox) findViewById(R.id.nomination);
+		String getCatNomination = Boolean.toString(nomination.isChecked());
+		EditText noteEt = (EditText) findViewById(R.id.note);
+		String getCatNote = noteEt.getText().toString();
+		Spinner title = (Spinner) findViewById(R.id.title);
+		String getCatTitle = title.getSelectedItem().toString();
+		EditText reasonEt = (EditText) findViewById(R.id.reason);
+		String getCatReason = reasonEt.getText().toString();
+
 		db.edit(Integer.parseInt(id), getCatType, getCatHead, getCatEyes,
 				getCatEars, getCatCoat, getCatTail, getCatCondition,
-				getCatImpress, getCatComment);
+				getCatImpress, getCatComment, getCatMark, getCatRank,
+				getCatBiv, getCatNomination, getCatNote, getCatTitle,
+				getCatReason);
 		// Send data to server
 		String messageToSend = writeForm(no, getCatType, getCatHead,
 				getCatEyes, getCatEars, getCatCoat, getCatTail,
-				getCatCondition, getCatImpress, getCatComment)
+				getCatCondition, getCatImpress, getCatComment, getCatMark,
+				getCatRank, getCatBiv, getCatNomination, getCatNote,
+				getCatTitle, getCatReason)
 				+ System.getProperty("line.separator");
-		// if (clientSender != null) {
-		// System.out.println(clientSender.getStatus());
-		// }
-		// ClientSender clientSender = connect.new ClientSender(
-		// this.getApplicationContext());
-		// clientSender.execute(messageToSend);
+		if (clientSender != null) {
+			System.out.println(clientSender.getStatus());
+		}
+		ClientSender clientSender = connect.new ClientSender(
+				this.getApplicationContext());
+		clientSender.execute(messageToSend);
 
 		startListActivity();
 		Toast.makeText(this, R.string.sendToast, Toast.LENGTH_LONG).show();
@@ -403,7 +499,9 @@ public class MainActivity extends Activity {
 
 	public JSONObject writeForm(String no, String type, String head,
 			String eyes, String ears, String coat, String tail,
-			String condition, String impress, String comment) {
+			String condition, String impress, String comment, String mark,
+			String rank, String biv, String nomination, String note,
+			String title, String reason) {
 		JSONObject object = new JSONObject();
 		object.put("no", no);
 		object.put("type", type);
@@ -415,7 +513,13 @@ public class MainActivity extends Activity {
 		object.put("condition", condition);
 		object.put("impress", impress);
 		object.put("comment", comment);
+		object.put("mark", mark);
+		object.put("rank", rank);
+		object.put("biv", biv);
+		object.put("nomination", nomination);
+		object.put("note", note);
+		object.put("title", title);
+		object.put("reason", reason);
 		return object;
 	}
-
 }

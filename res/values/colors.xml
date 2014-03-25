@@ -2,6 +2,8 @@
 <resources>
 	<color name="background_blue">#C4D8E2</color>
 	<color name="green">#00FF00</color>
+	<color name="yellow">#FFFF00</color>
+	<color name="blue">#0000FF</color>
 	<color name="white">#FFFFFF</color>
 	<color name="black">#000000</color>
 </resources>

@@ -17,6 +17,13 @@ public class Report {
 	String _condition;
 	String _impress;
 	String _comment;
+	String _mark;
+	String _rank;
+	String _biv;
+	String _nomination;
+	String _note;
+	String _title;
+	String _reason;
 
 	// Empty constructor
 	public Report() {
@@ -27,7 +34,9 @@ public class Report {
 	public Report(int id, String no, String _breed, String _code,
 			String _cclass, String _sex, String _born, String _type,
 			String _head, String _eyes, String _ears, String _coat,
-			String _tail, String _condition, String _impress, String _comment) {
+			String _tail, String _condition, String _impress, String _comment,
+			String _mark, String _rank, String _biv, String _nomination,
+			String _note, String _title, String _reason) {
 		this._id = id;
 		this._no = no;
 		this._breed = _breed;
@@ -44,13 +53,22 @@ public class Report {
 		this._condition = _condition;
 		this._impress = _impress;
 		this._comment = _comment;
+		this._mark = _mark;
+		this._rank = _rank;
+		this._biv = _biv;
+		this._nomination = _nomination;
+		this._note = _note;
+		this._title = _title;
+		this._reason = _reason;
 	}
 
 	// constructor
 	public Report(String no, String _breed, String _code, String _cclass,
 			String _sex, String _born, String _type, String _head,
 			String _eyes, String _ears, String _coat, String _tail,
-			String _condition, String _impress, String _comment) {
+			String _condition, String _impress, String _comment, String _mark,
+			String _rank, String _biv, String _nomination, String _note,
+			String _title, String _reason) {
 		this._no = no;
 		this._breed = _breed;
 		this._code = _code;
@@ -66,6 +84,13 @@ public class Report {
 		this._condition = _condition;
 		this._impress = _impress;
 		this._comment = _comment;
+		this._mark = _mark;
+		this._rank = _rank;
+		this._biv = _biv;
+		this._nomination = _nomination;
+		this._note = _note;
+		this._title = _title;
+		this._reason = _reason;
 	}
 
 	// get ID
@@ -226,5 +251,75 @@ public class Report {
 	// set comment
 	public void setComment(String comment) {
 		this._comment = comment;
+	}
+
+	// get mark
+	public String getMark() {
+		return this._mark;
+	}
+
+	// set mark
+	public void setMark(String mark) {
+		this._mark = mark;
+	}
+	
+	// get rank
+	public String getRank() {
+		return this._rank;
+	}
+
+	// set rank
+	public void setRank(String rank) {
+		this._rank = rank;
+	}
+	
+	// get BIV
+	public String getBiv() {
+		return this._biv;
+	}
+
+	// set BIV
+	public void setBiv(String biv) {
+		this._biv = biv;
+	}
+	
+	// get nomination
+	public String getNomination() {
+		return this._nomination;
+	}
+
+	// set nomination
+	public void setNomination(String nomination) {
+		this._nomination = nomination;
+	}
+	
+	// get note
+	public String getNote() {
+		return this._note;
+	}
+
+	// set note
+	public void setNote(String note) {
+		this._note = note;
+	}
+	
+	// get title
+	public String getTitle() {
+		return this._title;
+	}
+
+	// set title
+	public void setTitle(String title) {
+		this._title = title;
+	}
+	
+	// get reason
+	public String getReason() {
+		return this._reason;
+	}
+
+	// set reason
+	public void setReason(String reason) {
+		this._reason = reason;
 	}
 }

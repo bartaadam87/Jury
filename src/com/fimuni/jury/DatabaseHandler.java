@@ -32,6 +32,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_CONDITION = "condition";
 	private static final String KEY_IMPRESS = "impress";
 	private static final String KEY_COMMENT = "comment";
+	private static final String KEY_MARK = "mark";
+	private static final String KEY_RANK = "rank";
+	private static final String KEY_BIV = "biv";
+	private static final String KEY_NOMINATION = "nomination";
+	private static final String KEY_NOTE = "note";
+	private static final String KEY_TITLE = "title";
+	private static final String KEY_REASON = "reason";
 
 	public DatabaseHandler(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -47,7 +54,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ KEY_TYPE + " TEXT," + KEY_HEAD + " TEXT," + KEY_EYES
 				+ " TEXT," + KEY_EARS + " TEXT," + KEY_COAT + " TEXT,"
 				+ KEY_TAIL + " TEXT," + KEY_CONDITION + " TEXT," + KEY_IMPRESS
-				+ " TEXT," + KEY_COMMENT + " TEXT" + ")";
+				+ " TEXT," + KEY_COMMENT + " TEXT," + KEY_MARK + " TEXT,"
+				+ KEY_RANK + " TEXT," + KEY_BIV + " TEXT," + KEY_NOMINATION
+				+ " TEXT," + KEY_NOTE + " TEXT," + KEY_TITLE + " TEXT,"
+				+ KEY_REASON + " TEXT" + ")";
 		db.execSQL(CREATE_REPORTS_TABLE);
 	}
 
@@ -80,6 +90,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_CONDITION, report.getCondition());
 		values.put(KEY_IMPRESS, report.getImpress());
 		values.put(KEY_COMMENT, report.getComment());
+		values.put(KEY_MARK, report.getMark());
+		values.put(KEY_RANK, report.getRank());
+		values.put(KEY_BIV, report.getBiv());
+		values.put(KEY_NOMINATION, report.getNomination());
+		values.put(KEY_NOTE, report.getNote());
+		values.put(KEY_TITLE, report.getTitle());
+		values.put(KEY_REASON, report.getReason());
 
 		// Inserting Row
 		db.insert(TABLE_REPORTS, null, values);
@@ -93,8 +110,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		Cursor cursor = db.query(TABLE_REPORTS, new String[] { KEY_ID, KEY_NO,
 				KEY_BREED, KEY_CODE, KEY_CCLASS, KEY_SEX, KEY_BORN, KEY_TYPE,
 				KEY_HEAD, KEY_EYES, KEY_EARS, KEY_COAT, KEY_TAIL,
-				KEY_CONDITION, KEY_IMPRESS, KEY_COMMENT }, KEY_ID + "=?",
-				new String[] { String.valueOf(id) }, null, null, null, null);
+				KEY_CONDITION, KEY_IMPRESS, KEY_COMMENT, KEY_MARK, KEY_RANK,
+				KEY_BIV, KEY_NOMINATION, KEY_NOTE, KEY_TITLE, KEY_REASON },
+				KEY_ID + "=?", new String[] { String.valueOf(id) }, null, null,
+				null, null);
 		if (cursor != null)
 			cursor.moveToFirst();
 
@@ -104,7 +123,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				cursor.getString(7), cursor.getString(8), cursor.getString(9),
 				cursor.getString(10), cursor.getString(11),
 				cursor.getString(12), cursor.getString(13),
-				cursor.getString(14), cursor.getString(15));
+				cursor.getString(14), cursor.getString(15),
+				cursor.getString(16), cursor.getString(17),
+				cursor.getString(18), cursor.getString(19),
+				cursor.getString(20), cursor.getString(21),
+				cursor.getString(22));
 		return report;
 	}
 
@@ -137,6 +160,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				report.setCondition(cursor.getString(13));
 				report.setImpress(cursor.getString(14));
 				report.setComment(cursor.getString(15));
+				report.setMark(cursor.getString(16));
+				report.setRank(cursor.getString(17));
+				report.setBiv(cursor.getString(18));
+				report.setNomination(cursor.getString(19));
+				report.setNote(cursor.getString(20));
+				report.setTitle(cursor.getString(21));
+				report.setReason(cursor.getString(22));
 				reportList.add(report);
 			} while (cursor.moveToNext());
 		}
@@ -147,7 +177,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	// Updating single report
 	public int edit(int id, String type, String head, String eyes, String ears,
-			String coat, String tail, String condition, String impress, String comment) {
+			String coat, String tail, String condition, String impress,
+			String comment, String mark, String rank, String biv,
+			String nomination, String note, String title, String reason) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
@@ -160,7 +192,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_CONDITION, condition);
 		values.put(KEY_IMPRESS, impress);
 		values.put(KEY_COMMENT, comment);
-
+		values.put(KEY_MARK, mark);
+		values.put(KEY_RANK, rank);
+		values.put(KEY_BIV, biv);
+		values.put(KEY_NOMINATION, nomination);
+		values.put(KEY_NOTE, note);
+		values.put(KEY_TITLE, title);
+		values.put(KEY_REASON, reason);
 		// updating row
 		return db.update(TABLE_REPORTS, values, "id" + "='" + id + "'", null);
 	}
