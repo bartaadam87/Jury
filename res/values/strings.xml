@@ -59,7 +59,7 @@
         <item>4</item>
     </string-array>
 
-    <string name="title_prompt">Choose a mark</string>
+    <string name="title_prompt">Choose a title</string>
 
     <string-array name="title_arrays_classNo">
         <item></item>

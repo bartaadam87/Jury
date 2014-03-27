@@ -14,6 +14,7 @@ public class DatabaseJuryHandler extends SQLiteOpenHelper {
 	// Table Columns names
 	private static final String KEY_ID = "id";
 	private static final String KEY_NAME = "name";
+	private static final String KEY_IP = "ip";
 
 	public DatabaseJuryHandler(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -23,7 +24,7 @@ public class DatabaseJuryHandler extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		String CREATE_NAMES_TABLE = "CREATE TABLE " + TABLE_NAMES + "("
-				+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" + ")";
+				+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_IP + " TEXT" + ")";
 		db.execSQL(CREATE_NAMES_TABLE);
 	}
 
@@ -41,11 +42,12 @@ public class DatabaseJuryHandler extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAMES);
 		String CREATE_NAMES_TABLE = "CREATE TABLE " + TABLE_NAMES + "("
-				+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" + ")";
+				+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_IP + " TEXT" + ")";
 		db.execSQL(CREATE_NAMES_TABLE);
 		
 		ContentValues values = new ContentValues();
 		values.put(KEY_NAME, jury.getName());
+		values.put(KEY_IP, jury.getIp());
 
 		// Inserting Row
 		db.insert(TABLE_NAMES, null, values);
@@ -56,14 +58,14 @@ public class DatabaseJuryHandler extends SQLiteOpenHelper {
 	Jury getJury(int id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 
-		Cursor cursor = db.query(TABLE_NAMES, new String[] { KEY_ID, KEY_NAME },
+		Cursor cursor = db.query(TABLE_NAMES, new String[] { KEY_ID, KEY_NAME, KEY_IP },
 				KEY_ID + "=?", new String[] { String.valueOf(id) }, null, null,
 				null, null);
 		if (cursor != null)
 			cursor.moveToFirst();
 
 		Jury jury = new Jury(Integer.parseInt(cursor.getString(0)),
-				cursor.getString(1));
+				cursor.getString(1), cursor.getString(2));
 		return jury;
 	}
 }

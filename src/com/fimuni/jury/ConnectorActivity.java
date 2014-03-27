@@ -54,6 +54,13 @@ public class ConnectorActivity extends Activity {
 		sendButton = (Button) findViewById(R.id.sendButton);
 		context = this.getApplicationContext();
 
+		Jury jury = dbj.getJury(1);
+		String savedName = jury.getName();
+		String savedIp = jury.getIp();
+		
+		juryName.setText(savedName);
+		IPText.setText(savedIp);
+		
 		sendButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
@@ -66,7 +73,9 @@ public class ConnectorActivity extends Activity {
 				clientSender = new ClientSender(context);
 				clientSender.execute(messageToSend);
 
-				dbj.addJury(new Jury(juryName.getText().toString()));
+				String name = juryName.getText().toString();
+				String ip = IPText.getText().toString();
+				dbj.addJury(new Jury(name, ip));
 			}
 		});
 
@@ -169,29 +178,29 @@ public class ConnectorActivity extends Activity {
 				JSONObject cat = (JSONObject) obj;
 
 				//ODKOMENTOVAT PRO PRIJIMANI ZPRAV!
-//				String value = cat.get("value").toString();
+				String value = cat.get("value").toString();
 //
 //				// System.out.println(no + " " + breed + " " + ems + " " +
 //				// cclass + " " + sex + " " + born);
 //
-//				if (value.equals("sql")) {
-//					String no = cat.get("no").toString();
-//					String breed = cat.get("breed").toString();
-//					String ems = cat.get("ems").toString();
-//					String cclass = cat.get("class").toString();
-//					String sex = cat.get("sex").toString();
-//					String born = cat.get("born").toString();
-//					String empty = "";
-//					
-//					db.addReport(new Report(no, breed, ems, cclass, sex, born,
-//							empty, empty, empty, empty, empty, empty, empty,
-//							empty, empty));
-//				}
-//
-//				if (value.equals("msg")) {
-//					String msg = cat.get("msg").toString();
-//					Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-//				}
+				if (value.equals("sql")) {
+					String no = cat.get("no").toString();
+					String breed = cat.get("breed").toString();
+					String ems = cat.get("ems").toString();
+					String cclass = cat.get("class").toString();
+					String sex = cat.get("sex").toString();
+					String born = cat.get("born").toString();
+					String empty = "";
+					
+					db.addReport(new Report(no, breed, ems, cclass, sex, born,
+							empty, empty, empty, empty, empty, empty, empty,
+							empty, empty, empty, empty, "false", "false", empty, empty, empty));
+				}
+
+				if (value.equals("msg")) {
+					String msg = cat.get("msg").toString();
+					Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+				}
 
 			} else {
 				Toast.makeText(context, "Can't connect to server!",

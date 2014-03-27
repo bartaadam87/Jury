@@ -146,12 +146,13 @@ public class MainActivity extends Activity {
 		EditText condition = (EditText) findViewById(R.id.condition);
 		EditText impress = (EditText) findViewById(R.id.impress);
 		EditText comment = (EditText) findViewById(R.id.comment);
+		EditText reason = (EditText) findViewById(R.id.reason);
 		
 		setMark(catMark);
 		setRank(catRank);
+		
 		checkBiv(catBiv);
 		checkNomination(catNomination);
-		setTitle(catTitle);
 		
 		EditText note = (EditText) findViewById(R.id.note);
 
@@ -182,13 +183,14 @@ public class MainActivity extends Activity {
 		impress.setText(catImpress);
 		comment.setText(catComment);
 		note.setText(catNote);
+		reason.setText(catReason);
 
 		// Funkcni vypis z databaze!
 		// DatabaseHandler db = new DatabaseHandler(this);
 		// Report rep2 = db.getReport(1);
 		// EditText typeEt = (EditText) findViewById(R.id.type);
 		// typeEt.setText(rep2.getType());
-
+		
 		findViewById(R.id.reason).setVisibility(View.INVISIBLE);
 
 		Spinner title = (Spinner) findViewById(R.id.title);
@@ -197,7 +199,7 @@ public class MainActivity extends Activity {
 						R.layout.spinner_layout);
 		titleadapter.setDropDownViewResource(R.layout.spinner_layout);
 		title.setAdapter(titleadapter);
-
+		
 		title.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
@@ -214,6 +216,7 @@ public class MainActivity extends Activity {
 
 			}
 		});
+		setCatTitle(catTitle);
 	}
 
 	protected void displayNr(String nr, TextView tv) {
@@ -338,25 +341,25 @@ public class MainActivity extends Activity {
 		if (str.equals("")) {
 			rank.setSelection(0);
 		}
-		if (str.equals(1)) {
+		if (str.equals("1")) {
 			rank.setSelection(1);
 		}
-		if (str.equals(2)) {
+		if (str.equals("2")) {
 			rank.setSelection(2);
 		}
-		if (str.equals(3)) {
+		if (str.equals("3")) {
 			rank.setSelection(3);
 		}
-		if (str.equals(4)) {
+		if (str.equals("4")) {
 			rank.setSelection(4);
 		}
 	}
 	
-	protected void setTitle(String str) {
+	protected void setCatTitle(String str) {
 		Spinner title = (Spinner) findViewById(R.id.title);
-		if (str.equals("") || str.isEmpty()) {
+		if (str.equals("")) {
 			title.setSelection(0);
-		}else{
+		} else {
 			title.setSelection(1);
 		}
 	}
@@ -490,7 +493,7 @@ public class MainActivity extends Activity {
 		}
 		ClientSender clientSender = connect.new ClientSender(
 				this.getApplicationContext());
-		clientSender.execute(messageToSend);
+		clientSender.execute(messageToSend.toString());
 
 		startListActivity();
 		Toast.makeText(this, R.string.sendToast, Toast.LENGTH_LONG).show();
