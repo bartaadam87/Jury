@@ -69,6 +69,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		onCreate(db);
 
 	}
+	
+	public void cleanTable() {
+		SQLiteDatabase db= this.getWritableDatabase();
+		db.delete("reports",null,null);
+	}
 
 	// Add report
 	void addReport(Report report) {

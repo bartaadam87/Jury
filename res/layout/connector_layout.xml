@@ -41,15 +41,4 @@
         android:layout_marginTop="104dp"
         android:text="@string/buttonConnect" />
 
-    <Button
-        android:id="@+id/startButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/sendButton"
-        android:layout_alignRight="@+id/sendButton"
-        android:layout_below="@+id/sendButton"
-        android:onClick="startJuryClicked"
-        android:layout_marginTop="39dp"
-        android:text="@string/buttonStart" />
-
 </RelativeLayout>

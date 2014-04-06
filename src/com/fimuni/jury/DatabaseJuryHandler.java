@@ -26,6 +26,10 @@ public class DatabaseJuryHandler extends SQLiteOpenHelper {
 		String CREATE_NAMES_TABLE = "CREATE TABLE " + TABLE_NAMES + "("
 				+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_IP + " TEXT" + ")";
 		db.execSQL(CREATE_NAMES_TABLE);
+		ContentValues cv = new ContentValues();
+		cv.putNull("name");
+		cv.putNull("ip");
+		db.insert("names", null, cv);
 	}
 
 	// Upgrading database

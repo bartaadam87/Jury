@@ -6,7 +6,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -16,6 +19,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -57,10 +61,10 @@ public class ConnectorActivity extends Activity {
 		Jury jury = dbj.getJury(1);
 		String savedName = jury.getName();
 		String savedIp = jury.getIp();
-		
+
 		juryName.setText(savedName);
 		IPText.setText(savedIp);
-		
+
 		sendButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
@@ -72,6 +76,21 @@ public class ConnectorActivity extends Activity {
 				}
 				clientSender = new ClientSender(context);
 				clientSender.execute(messageToSend);
+
+				// kolo
+				try {
+					Boolean result = clientSender.get();
+					if (result) {
+						finish();
+						startJuryActivity();
+					}
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} catch (ExecutionException e) {
+					e.printStackTrace();
+				}
+				// toc kolem
+				// zrusis kolo
 
 				String name = juryName.getText().toString();
 				String ip = IPText.getText().toString();
@@ -85,6 +104,7 @@ public class ConnectorActivity extends Activity {
 		JSONObject object = new JSONObject();
 		object.put("name", juryName.getText().toString());
 		object.put("mac", getMacAddress(context));
+		object.put("value", "initialConnection");
 		return object;
 	}
 
@@ -95,17 +115,17 @@ public class ConnectorActivity extends Activity {
 		return true;
 	}
 
-//	@Override
-//	protected void onStop() {
-//		super.onStop();
-//		try {
-//			socket.close();
-//			System.out.println("Socket closed!");
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
-	
+	// @Override
+	// protected void onStop() {
+	// super.onStop();
+	// try {
+	// socket.close();
+	// System.out.println("Socket closed!");
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// }
+	// }
+
 	// public JSONObject writeJSON() throws JSONException {
 	// JSONObject object = new JSONObject();
 	// object.put("no", "1");
@@ -117,20 +137,12 @@ public class ConnectorActivity extends Activity {
 	// return object;
 	// }
 
-	public class ClientSender extends AsyncTask<String, Void, Socket> {
+	public class ClientSender extends AsyncTask<String, Void, Boolean> {
 		private String answer;
 		private Context context;
 		private BufferedWriter out;
 		private BufferedReader in;
-		// private static final String SERVER_IP = "192.168.1.102";
 		private final String SERVER_IP = IPText.getText().toString();
-
-		// public static final String ID = "id";
-
-		// String id = UUID.randomUUID().toString();
-		// private String id=String.valueOf(Math.random());
-		// public void setId(String id){this.id=id;}
-		// public String getId(){return this.id;}
 
 		public ClientSender(Context context) {
 			this.context = context;
@@ -139,7 +151,7 @@ public class ConnectorActivity extends Activity {
 		}
 
 		@Override
-		protected Socket doInBackground(String... params) {
+		protected Boolean doInBackground(String... params) {
 			try {
 				if (socket == null) {
 					socket = new Socket(SERVER_IP, 3344);
@@ -153,21 +165,12 @@ public class ConnectorActivity extends Activity {
 				in = new BufferedReader(new InputStreamReader(
 						socket.getInputStream()));
 
-				// out.write(getMacAddress(this.context));
-				// System.out.println(id);
-
 				out.write(params[0]);
 				out.flush();
 				answer = in.readLine() + System.getProperty("line.separator");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 
-			return socket;
-		}
+				String name = juryName.getText().toString();
 
-		protected void onPostExecute(Socket socket) {
-			if (socket != null) {
 				JSONParser parser = new JSONParser();
 				Object obj = null;
 				try {
@@ -175,35 +178,100 @@ public class ConnectorActivity extends Activity {
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
-				JSONObject cat = (JSONObject) obj;
+				JSONObject cats = (JSONObject) obj;
+				
+				if (cats.containsKey(name)) {
+					System.out.println("Jury name found");
+					System.out.println("answer: " + answer);
 
-				//ODKOMENTOVAT PRO PRIJIMANI ZPRAV!
-				String value = cat.get("value").toString();
-//
-//				// System.out.println(no + " " + breed + " " + ems + " " +
-//				// cclass + " " + sex + " " + born);
-//
-				if (value.equals("sql")) {
-					String no = cat.get("no").toString();
-					String breed = cat.get("breed").toString();
-					String ems = cat.get("ems").toString();
-					String cclass = cat.get("class").toString();
-					String sex = cat.get("sex").toString();
-					String born = cat.get("born").toString();
-					String empty = "";
+					db.cleanTable();
 					
-					db.addReport(new Report(no, breed, ems, cclass, sex, born,
-							empty, empty, empty, empty, empty, empty, empty,
-							empty, empty, empty, empty, "false", "false", empty, empty, empty));
+					// String str = (String) cats.get("Adam Barta").toString();
+					// String str2 = str.replace("[", "");
+					// String str3 = str2.replace("]", "");
+					// System.out.println("str: " + str3);
+
+					JSONArray list = (JSONArray) cats.get(name);
+					System.out.println("arr: " + list.toJSONString());
+
+					for (int i = 0; i < list.size(); i++) {
+						JSONObject cat = (JSONObject) list.get(i);
+//						System.out.println("object " + i + ": " + cat);
+
+						String no = cat.get("no").toString();
+						String breed = cat.get("breed").toString();
+						String ems = cat.get("ems").toString();
+						String cclass = cat.get("class").toString();
+						String sex = cat.get("sex").toString();
+						String born = cat.get("born").toString();
+						String empty = "";
+
+						db.addReport(new Report(no, breed, ems, cclass, sex,
+								born, empty, empty, empty, empty, empty, empty,
+								empty, empty, empty, empty, empty, "false",
+								"false", empty, empty, empty));
+					}
+
+				} else {
+					System.out.println("Jury name not found!");
+//					socket.close();
+					return false;
 				}
 
-				if (value.equals("msg")) {
-					String msg = cat.get("msg").toString();
-					Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-				}
+				// JSONParser parser = new JSONParser();
+				// Object obj = null;
+				// try {
+				// obj = parser.parse(answer);
+				// } catch (ParseException e) {
+				// e.printStackTrace();
+				// }
+				// JSONObject cat = (JSONObject) obj;
+				//
+				// String value = cat.get("value").toString();
+				//
+				// // PRESUNOIT DO doInBackground - zustane tu jen vykreslovani
+				// // toustu
+				// if (value.equals("sql")) {
+				// String no = cat.get("no").toString();
+				// String breed = cat.get("breed").toString();
+				// String ems = cat.get("ems").toString();
+				// String cclass = cat.get("class").toString();
+				// String sex = cat.get("sex").toString();
+				// String born = cat.get("born").toString();
+				// String empty = "";
+				//
+				// db.addReport(new Report(no, breed, ems, cclass, sex, born,
+				// empty, empty, empty, empty, empty, empty, empty,
+				// empty, empty, empty, empty, "false", "false",
+				// empty, empty, empty));
+				// }
 
+				// if (value.equals("msg")) {
+				// String msg = cat.get("msg").toString();
+				// Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+				// try {
+				// socket.close();
+				// } catch (IOException e) {
+				// e.printStackTrace();
+				// }
+				// }
+				System.out
+						.println("I'm cleaning my stuff...closing socket NOW!");
+				socket.close();
+			} catch (IOException e) {
+				System.out
+						.println("Something wrong - Error in *Do in background*");
+				return false;
+			}
+			return true;
+		}
+
+		protected void onPostExecute(Boolean result) {
+			if (result) {
+				Toast.makeText(context, "Success - Starting!", Toast.LENGTH_LONG)
+						.show();
 			} else {
-				Toast.makeText(context, "Can't connect to server!",
+				Toast.makeText(context, "Wrong IP address or Jury name!",
 						Toast.LENGTH_LONG).show();
 			}
 		}
@@ -220,10 +288,10 @@ public class ConnectorActivity extends Activity {
 		return macAddress;
 	}
 
-	public void startJuryClicked(View button) {
-		this.finish();
-		startJuryActivity();
-	}
+	// public void startJuryClicked(View button) {
+	// this.finish();
+	// startJuryActivity();
+	// }
 
 	protected void startJuryActivity() {
 		Intent intent = new Intent(this, JuryActivity.class);

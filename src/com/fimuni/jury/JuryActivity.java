@@ -135,9 +135,9 @@ public class JuryActivity extends ListActivity {
 			names.add(log);
 		}
 
-		// Insert Jury name into SQL database
-		// Log.d("Insert: ", "Inserting ..");
-		// dbj.addJury(new Jury("Adam Barta"));
+//		 Insert Jury name into SQL database
+//		 Log.d("Insert: ", "Inserting ..");
+//		 dbj.addJury(new Jury("Adam Barta", ""));
 
 		// TextView juryNameTv = (TextView) getWindow().findViewById(
 		// R.id.title_right);
